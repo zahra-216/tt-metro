@@ -40,7 +40,7 @@
     {{-- Main navigation --}}
     <header class="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-lg" x-data="{ open: null }" @keydown.escape.window="open = null; menu = false">
         <div class="wrap flex h-20 items-center justify-between gap-6">
-            <a href="{{ route('home') }}" class="flex items-center gap-3">
+            <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-3">
                 <img src="{{ asset('images/logo.jpg') }}" alt="TT Metro Campus logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="leading-tight">
                     <span class="block whitespace-nowrap font-display text-lg font-extrabold tracking-tight text-brand-700 sm:text-xl">TT METRO CAMPUS</span>
@@ -50,7 +50,7 @@
 
             <nav class="hidden items-center gap-1 xl:flex" aria-label="Main">
                 @php
-                    $link = 'flex items-center gap-1 whitespace-nowrap rounded-xl px-4 py-2.5 text-[15px] font-semibold text-brand-700 transition hover:bg-sky-soft';
+                    $link = 'flex items-center gap-1 whitespace-nowrap rounded-xl px-3 py-2.5 text-[15px] font-semibold text-brand-700 transition hover:bg-sky-soft';
                     $active = 'bg-sky-soft';
                 @endphp
                 <a href="{{ route('home') }}" class="{{ $link }} {{ request()->routeIs('home') ? $active : '' }}">Home</a>
@@ -98,7 +98,7 @@
             <div class="flex items-center gap-2">
                 <form action="{{ route('academics') }}" method="get" class="hidden items-center 2xl:flex" role="search">
                     <label class="sr-only" for="nav-search">Search programmes</label>
-                    <input id="nav-search" name="q" type="search" placeholder="Search programmes…" class="h-11 w-48 rounded-full border border-transparent bg-surface px-5 text-sm outline-none transition focus:w-60 focus:border-brand-600 focus:bg-white">
+                    <input id="nav-search" name="q" type="search" placeholder="Search programmes…" class="h-11 w-40 rounded-full border border-transparent bg-surface px-5 text-sm outline-none transition focus:w-56 focus:border-brand-600 focus:bg-white">
                 </form>
                 <a href="{{ route('academics') }}" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 transition hover:bg-sky-soft 2xl:hidden" aria-label="Search programmes"><x-ico name="search" /></a>
                 <a href="{{ route('apply') }}" class="btn btn-primary hidden whitespace-nowrap sm:inline-flex">Apply Now</a>
@@ -109,7 +109,7 @@
         </div>
 
         {{-- Mobile menu --}}
-        <div x-cloak x-show="menu" x-transition class="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-line bg-white xl:hidden">
+        <div x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-8.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
             <nav class="wrap space-y-1 py-4" aria-label="Mobile">
                 @foreach ([['Home', route('home')], ['About Us', route('about')], ['Academics', route('academics')], ['Student Life', route('student-life')], ['Gallery', route('gallery')], ['Events', route('events')], ['Contact', route('contact')]] as [$label, $url])
                     <a href="{{ $url }}" class="block rounded-xl px-4 py-3 text-base font-semibold text-brand-700 hover:bg-sky-soft">{{ $label }}</a>

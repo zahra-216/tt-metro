@@ -30,3 +30,7 @@ Thumbs.db
 /incoming-media
 /storage/app/tmp
 /MISSING-IMAGES.md
+/ttmetro.sql
+/uploads.tar.gz
+/*.sql
+/*.tar.gz
