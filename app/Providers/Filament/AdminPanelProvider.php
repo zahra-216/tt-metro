@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->profile()
             ->darkMode(false)
             ->font('Inter')
             ->userMenu(position: UserMenuPosition::Sidebar)
