@@ -33,7 +33,6 @@
                     <a href="{{ setting('verify_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-white"><x-ico name="shield" class="h-4 w-4" /> Verify Certificate</a>
                 @endif
             </nav>
-            <a href="{{ route('apply') }}" class="text-xs font-bold underline md:hidden lg:hidden">Apply now</a>
         </div>
     </div>
 
