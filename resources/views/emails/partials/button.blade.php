@@ -1,0 +1,3 @@
+<table role="presentation" cellpadding="0" cellspacing="0" style="display:inline-block;margin:0 8px 8px 0;"><tr><td style="border-radius:999px;background:{{ $primary ?? true ? '#0b4a8f' : '#ffffff' }};{{ ($primary ?? true) ? '' : 'border:1px solid #0b4a8f;' }}">
+    <a href="{{ $href }}" style="display:inline-block;padding:13px 26px;font-size:14px;font-weight:700;text-decoration:none;color:{{ ($primary ?? true) ? '#ffffff' : '#0b4a8f' }};">{{ $label }}</a>
+</td></tr></table>
