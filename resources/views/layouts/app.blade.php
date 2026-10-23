@@ -14,7 +14,7 @@
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
 
     {{-- Announcement & portal bar --}}
-    <div class="bg-sky-brand text-navy-950">
+    <div class="bg-bar text-navy-950">
         <div class="wrap flex items-center justify-between gap-4 py-2 text-[13px] font-medium">
             <div class="flex min-w-0 items-center gap-3">
                 @if (setting('admissions_badge'))
@@ -38,12 +38,12 @@
 
     {{-- Main navigation --}}
     <header class="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-lg" x-data="{ open: null }" @keydown.escape.window="open = null; menu = false">
-        <div class="wrap flex h-20 items-center justify-between gap-6">
+        <div class="wrap flex h-20 items-center justify-between gap-3 sm:gap-6">
             <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-3">
                 <img src="{{ asset('images/logo.jpg') }}" alt="TT Metro Campus logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="leading-tight">
-                    <span class="block whitespace-nowrap font-display text-lg font-extrabold tracking-tight text-brand-700 sm:text-xl">TT METRO CAMPUS</span>
-                    <span class="hidden whitespace-nowrap text-[11px] font-medium uppercase tracking-wider text-muted 2xl:block">Higher Education Institute <span class="text-brand-600">•</span> Sri Lanka</span>
+                    <span class="block whitespace-nowrap font-display text-base font-extrabold tracking-tight text-brand-700 min-[400px]:text-lg sm:text-2xl 2xl:text-[28px]">TT METRO CAMPUS</span>
+                    <span class="mt-0.5 hidden whitespace-nowrap text-[13px] font-medium text-muted sm:block">Empowering Minds, Shaping Futures.</span>
                 </span>
             </a>
 
@@ -135,7 +135,7 @@
                     <img src="{{ asset('images/logo.jpg') }}" alt="" class="h-12 w-12 rounded-full object-cover">
                     <span class="font-display text-lg font-extrabold text-white">TT METRO CAMPUS</span>
                 </div>
-                <p class="mt-5 text-sm leading-relaxed">An innovative higher education institute in Sri Lanka, established in 2015, delivering nationally and internationally recognised programmes.</p>
+                <p class="mt-5 text-left text-sm leading-relaxed">An innovative higher education institute in Sri Lanka, established in 2015, delivering nationally and internationally recognised programmes.</p>
                 <div class="mt-6 flex gap-3">
                     @foreach (['facebook', 'instagram', 'youtube', 'linkedin', 'tiktok'] as $s)
                         @if (setting($s))

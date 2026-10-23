@@ -69,7 +69,7 @@
                 <div class="card h-full p-6">
                     <span class="grid h-12 w-12 place-items-center rounded-2xl bg-sky-soft text-brand-700"><x-ico :name="$ic" class="h-6 w-6" /></span>
                     <h3 class="mt-4 text-base font-bold">{{ $t }}</h3>
-                    <p class="mt-2 text-sm leading-relaxed text-muted">{{ $d }}</p>
+                    <p class="mt-2 text-left text-sm leading-relaxed text-muted">{{ $d }}</p>
                 </div>
             @endforeach
         </div>

@@ -12,7 +12,7 @@
     </div>
     <div class="flex flex-1 flex-col p-6">
         <h3 class="text-lg font-bold leading-snug text-navy-900">{{ $event->title }}</h3>
-        <p class="mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{{ $event->excerpt }}</p>
+        <p class="mt-3 line-clamp-3 text-left text-sm leading-relaxed text-muted">{{ $event->excerpt }}</p>
         <span class="mt-auto flex items-center gap-1 pt-5 text-sm font-semibold text-brand-700">Read more <x-ico name="arrow" class="h-4 w-4 transition group-hover:translate-x-1" /></span>
     </div>
 </a>
