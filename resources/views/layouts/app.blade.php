@@ -14,23 +14,23 @@
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
 
     {{-- Announcement & portal bar --}}
-    <div class="bg-bar text-navy-950">
-        <div class="wrap flex items-center justify-between gap-4 py-2 text-[13px] font-medium">
+    <div class="bg-bar text-white">
+        <div class="wrap flex items-center justify-between gap-4 py-3 text-sm font-medium">
             <div class="flex min-w-0 items-center gap-3">
                 @if (setting('admissions_badge'))
-                    <span class="shrink-0 rounded-md bg-brand-700 px-3 py-1 text-xs font-bold tracking-wide text-white">{{ setting('admissions_badge') }}</span>
+                    <span class="shrink-0 rounded-md bg-white px-3 py-1 text-xs font-bold tracking-wide text-brand-700">{{ setting('admissions_badge') }}</span>
                 @endif
                 <a href="{{ route('apply') }}" class="hidden truncate hover:underline md:block">{{ setting('admissions_text') }}</a>
             </div>
             <nav class="hidden shrink-0 items-center gap-6 lg:flex" aria-label="Portals">
                 @if (setting('student_portal_url'))
-                    <a href="{{ setting('student_portal_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-white"><x-ico name="book" class="h-4 w-4" /> Student Portal</a>
+                    <a href="{{ setting('student_portal_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:underline"><x-ico name="book" class="h-4 w-4" /> Student Portal</a>
                 @endif
                 @if (setting('staff_portal_url'))
-                    <a href="{{ setting('staff_portal_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-white"><x-ico name="briefcase" class="h-4 w-4" /> Staff Portal</a>
+                    <a href="{{ setting('staff_portal_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:underline"><x-ico name="briefcase" class="h-4 w-4" /> Staff Portal</a>
                 @endif
                 @if (setting('verify_url'))
-                    <a href="{{ setting('verify_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-white"><x-ico name="shield" class="h-4 w-4" /> Verify Certificate</a>
+                    <a href="{{ setting('verify_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:underline"><x-ico name="shield" class="h-4 w-4" /> Verify Certificate</a>
                 @endif
             </nav>
         </div>
@@ -38,12 +38,12 @@
 
     {{-- Main navigation --}}
     <header class="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-lg" x-data="{ open: null }" @keydown.escape.window="open = null; menu = false">
-        <div class="wrap flex h-20 items-center justify-between gap-3 sm:gap-6">
+        <div class="wrap flex h-24 items-center justify-between gap-3 sm:gap-6">
             <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-3">
                 <img src="{{ asset('images/logo.jpg') }}" alt="TT Metro Campus logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="leading-tight">
                     <span class="block whitespace-nowrap font-display text-base font-extrabold tracking-tight text-brand-700 min-[400px]:text-lg sm:text-2xl 2xl:text-[28px]">TT METRO CAMPUS</span>
-                    <span class="mt-0.5 hidden whitespace-nowrap text-[13px] font-medium text-muted sm:block">Empowering Minds, Shaping Futures.</span>
+                    <span class="mt-1 hidden w-0 min-w-full whitespace-nowrap text-[12px] font-medium text-muted [text-align-last:justify] sm:block 2xl:text-[13px] 2xl:tracking-wide">Empowering Minds, Shaping Futures.</span>
                 </span>
             </a>
 
@@ -108,7 +108,7 @@
         </div>
 
         {{-- Mobile menu --}}
-        <div x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-8.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
+        <div x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-9.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
             <nav class="wrap space-y-1 py-4" aria-label="Mobile">
                 @foreach ([['Home', route('home')], ['About Us', route('about')], ['Academics', route('academics')], ['Student Life', route('student-life')], ['Gallery', route('gallery')], ['Events', route('events')], ['Contact', route('contact')]] as [$label, $url])
                     <a href="{{ $url }}" class="block rounded-xl px-4 py-3 text-base font-semibold text-brand-700 hover:bg-sky-soft">{{ $label }}</a>

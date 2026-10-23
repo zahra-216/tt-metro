@@ -9,8 +9,11 @@
         <div class="space-y-4 lg:col-span-2">
             @foreach ([['pin', 'Visit us', setting('address')], ['phone', 'Call us', collect([setting('phone_1'), setting('phone_2')])->filter()->all()], ['mail', 'Email us', collect([setting('email_1'), setting('email_2')])->filter()->all()], ['clock', 'Opening hours', setting('opening_hours')]] as [$ic, $t, $v])
                 @if ($v)
+                    @php
+                        $tint = ['pin' => 'bg-red-50 text-red-600', 'phone' => 'bg-emerald-50 text-emerald-600', 'mail' => 'bg-amber-50 text-amber-600', 'clock' => 'bg-violet-50 text-violet-600'][$ic];
+                    @endphp
                     <div class="card flex gap-4 p-6">
-                        <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-sky-soft text-brand-700"><x-ico :name="$ic" class="h-6 w-6" /></span>
+                        <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl {{ $tint }}"><x-ico :name="$ic" class="h-6 w-6" /></span>
                         <div><h3 class="text-base font-bold">{{ $t }}</h3><div class="mt-1 space-y-1 break-words text-sm leading-relaxed text-muted">@foreach ((array) $v as $line)<p>@if ($t === 'Call us')<a href="tel:{{ preg_replace('/[^\d+]/', '', $line) }}" class="hover:text-brand-700">{{ $line }}</a>@elseif ($t === 'Email us')<a href="mailto:{{ $line }}" class="hover:text-brand-700">{{ $line }}</a>@else{{ $line }}@endif</p>@endforeach</div></div>
                     </div>
                 @endif

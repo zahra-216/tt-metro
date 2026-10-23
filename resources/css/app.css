@@ -15,7 +15,7 @@
     --color-brand-500: #2a7fd4;
     --color-sky-brand: #6eb5ff;
     --color-sky-soft: #e8f2fd;
-    --color-bar: #3b8de0;
+    --color-bar: #1b6fc4;
     --color-ink: #0f1f33;
     --color-muted: #5b6b80;
     --color-line: #e3eaf3;
@@ -32,7 +32,7 @@
     [x-cloak] { display: none !important; }
 
     /* Body copy is justified; anything inside a centred or right-aligned block keeps that alignment. */
-    main p, main li, footer p { text-align: justify; hyphens: auto; }
+    main p, main li, footer p { text-align: justify; hyphens: none; }
     .text-center :is(p, li) { text-align: center; }
     .text-right :is(p, li) { text-align: right; }
 }
