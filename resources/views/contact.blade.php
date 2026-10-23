@@ -36,5 +36,6 @@
         </div>
     </div>
     <div class="wrap mt-12"><x-map /></div>
+    <x-branches class="wrap mt-16" />
 </section>
 @endsection

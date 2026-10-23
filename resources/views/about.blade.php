@@ -15,7 +15,7 @@
     <div class="wrap grid gap-12 lg:grid-cols-5 lg:gap-16">
         <div class="lg:col-span-3">
             <span class="eyebrow">About TTMC</span>
-            <h2 class="h-section">{{ setting('welcome_title') }}</h2>
+            <h2 class="h-section">{{ keep_name(setting('welcome_title')) }}</h2>
             <div class="prose-site mt-5">@foreach ($paras(setting('welcome_text')) as $p)<p>{{ $p }}</p>@endforeach</div>
         </div>
         <div class="grid auto-rows-fr grid-cols-2 gap-4 lg:col-span-2">
@@ -81,7 +81,7 @@
 @if ($tabs)
 <section id="leadership" class="section" x-data="{ tab: '{{ request()->query('team', $first) }}' }">
     <div class="wrap">
-        <div class="max-w-2xl"><span class="eyebrow">Our people</span><h2 class="h-section">The team behind TT Metro Campus</h2></div>
+        <div class="max-w-2xl"><span class="eyebrow">Our people</span><h2 class="h-section">The team behind <span class="whitespace-nowrap">TT Metro Campus</span></h2></div>
         <div class="mt-8 flex flex-wrap gap-2" role="tablist">
             @foreach ($tabs as $key => $label)
                 <button type="button" role="tab" @click="tab = '{{ $key }}'" :aria-selected="tab === '{{ $key }}'" :class="tab === '{{ $key }}' ? 'bg-brand-700 text-white shadow' : 'bg-surface text-navy-900 hover:bg-sky-soft'" class="rounded-full px-5 py-2.5 text-sm font-semibold transition">{{ $label }} <span class="ml-1 opacity-60">{{ $groups[$key]->count() }}</span></button>

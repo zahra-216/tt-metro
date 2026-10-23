@@ -42,8 +42,8 @@
             <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-3">
                 <img src="{{ asset('images/logo.jpg') }}" alt="TT Metro Campus logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="leading-tight">
-                    <span class="block whitespace-nowrap font-display text-base font-extrabold tracking-tight text-brand-700 min-[400px]:text-lg sm:text-2xl 2xl:text-[28px]">TT METRO CAMPUS</span>
-                    <span class="mt-1 hidden w-0 min-w-full whitespace-nowrap text-[12px] font-medium text-muted [text-align-last:justify] sm:block 2xl:text-[13px] 2xl:tracking-wide">Empowering Minds, Shaping Futures.</span>
+                    <span class="block whitespace-nowrap font-display text-[17px] font-extrabold tracking-tight text-brand-700 min-[400px]:text-xl sm:text-[26px] 2xl:text-[32px]">TT METRO CAMPUS</span>
+                    <span class="mt-0.5 hidden whitespace-nowrap text-[13px] font-medium tracking-wide text-muted sm:block">Empowering Minds, Shaping Futures.</span>
                 </span>
             </a>
 

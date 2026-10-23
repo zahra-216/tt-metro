@@ -16,7 +16,7 @@
             <span class="reveal inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest backdrop-blur">
                 <span class="h-1.5 w-1.5 rounded-full bg-sky-brand"></span> Best higher education network in Sri Lanka
             </span>
-            <h1 class="reveal mt-6 text-4xl font-extrabold leading-[1.08] text-white sm:text-6xl" style="animation-delay:.08s">{{ setting('hero_title') }}</h1>
+            <h1 class="reveal mt-6 text-4xl font-extrabold leading-[1.08] text-white sm:text-6xl" style="animation-delay:.08s">{{ keep_name(setting('hero_title')) }}</h1>
             <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-white/80" style="animation-delay:.16s">{{ setting('hero_subtitle') }}</p>
             <div class="reveal mt-9 flex flex-wrap gap-3" style="animation-delay:.24s">
                 <a href="{{ route('apply') }}" class="btn btn-light px-7 py-3.5">Apply Now <x-ico name="arrow" class="h-4 w-4" /></a>
@@ -55,7 +55,7 @@
     <div class="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div class="reveal">
             <span class="eyebrow">About TT Metro Campus</span>
-            <h2 class="h-section">{{ setting('welcome_title') }}</h2>
+            <h2 class="h-section">{{ keep_name(setting('welcome_title')) }}</h2>
             <div class="prose-site mt-5">
                 @foreach (preg_split('/\R{2,}/', (string) setting('welcome_text')) as $para)<p>{{ $para }}</p>@endforeach
             </div>
@@ -200,6 +200,7 @@
             </div>
             <div class="lg:col-span-3"><x-map /></div>
         </div>
+        <x-branches class="mt-20" />
     </div>
 </section>
 @endsection
