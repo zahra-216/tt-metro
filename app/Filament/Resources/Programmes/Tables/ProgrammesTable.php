@@ -33,7 +33,7 @@ class ProgrammesTable
             ->filters([
                 SelectFilter::make('level')->options([
                     'Diploma' => 'Diploma', 'HND' => 'HND', 'Top-up' => 'Top-up', 'Degree' => 'Degree',
-                    'Postgraduate Diploma' => 'Postgraduate Diploma', 'Masters' => 'Masters', 'Other' => 'Other',
+                    'Postgraduate Diploma' => 'Postgraduate Diploma', 'Other' => 'Other',
                 ]),
                 SelectFilter::make('faculty_id')->label('Faculty')->relationship('faculty', 'name'),
                 TernaryFilter::make('is_active')->label('Active'),

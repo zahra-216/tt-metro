@@ -68,10 +68,6 @@ class EntryRequirements
                 "A recognised Bachelor's degree or equivalent qualification in a relevant discipline",
                 'Proficiency in English, the language of instruction',
             ],
-            'Masters' => [
-                "A recognised Bachelor's degree in a relevant or related discipline",
-                'Proficiency in English, the language of instruction',
-            ],
             default => $raw ?? [],
         };
     }

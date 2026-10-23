@@ -95,7 +95,7 @@
             @endforeach
             <a href="{{ route('academics') }}" class="reveal flex flex-col justify-center rounded-2xl bg-navy-900 p-8 text-white transition hover:bg-brand-700">
                 <h3 class="text-xl font-bold text-white">Browse all programmes</h3>
-                <p class="mt-2 text-sm text-white/75">Diploma · HND · Top-up · Degree · Postgraduate · Masters</p>
+                <p class="mt-2 text-sm text-white/75">Diploma · HND · Top-up · Degree · Postgraduate</p>
                 <span class="mt-6 inline-flex items-center gap-1 text-sm font-semibold">View all <x-ico name="arrow" class="h-4 w-4" /></span>
             </a>
         </div>

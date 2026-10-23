@@ -22,7 +22,7 @@ class ProgrammeForm
                 TextInput::make('title')
                     ->required(),
                 Select::make('level')
-                    ->options(['Diploma' => 'Diploma', 'HND' => 'HND', 'Degree' => 'Degree', 'Top-up' => 'Top-up', 'Postgraduate Diploma' => 'Postgraduate Diploma', 'Masters' => 'Masters', 'Other' => 'Other'])
+                    ->options(['Diploma' => 'Diploma', 'HND' => 'HND', 'Degree' => 'Degree', 'Top-up' => 'Top-up', 'Postgraduate Diploma' => 'Postgraduate Diploma', 'Other' => 'Other'])
                     ->default('Diploma')
                     ->required(),
                 TextInput::make('duration'),

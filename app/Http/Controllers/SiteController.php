@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
-    public const LEVELS = ['Diploma', 'HND', 'Top-up', 'Degree', 'Postgraduate Diploma', 'Masters'];
+    public const LEVELS = ['Diploma', 'HND', 'Top-up', 'Degree', 'Postgraduate Diploma'];
 
     public function home()
     {
