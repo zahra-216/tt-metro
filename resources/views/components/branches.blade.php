@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     @if ($b->phone_1 || $b->phone_2)
-                        <div class="mt-4 flex items-start gap-4">
+                        <div class="mt-4 flex items-center gap-4">
                             <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-600"><x-ico name="phone" class="h-6 w-6" /></span>
                             <ul class="space-y-1 text-sm leading-relaxed text-muted">
                                 @foreach (array_filter([$b->phone_1, $b->phone_2]) as $phone)
