@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         }
 
         if (Stat::count() === 0) {
-            foreach ([['10', '+', 'Years of Educational Excellence'], ['5', '+', 'Faculties'], ['100', '+', 'Programmes'], ['1000', '+', 'Students']] as $i => [$v, $s, $l]) {
+            foreach ([['10', '+', 'Years of Educational Excellence'], ['5', '+', 'Faculties'], ['100', '+', 'Programmes'], ['5000', '+', 'Students']] as $i => [$v, $s, $l]) {
                 Stat::create(['value' => $v, 'suffix' => $s, 'label' => $l, 'sort_order' => $i]);
             }
         }

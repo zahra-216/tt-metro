@@ -15,7 +15,7 @@
 
     {{-- Announcement & portal bar --}}
     <div class="bg-bar text-white">
-        <div class="wrap flex items-center justify-between gap-4 py-3 text-sm font-medium">
+        <div class="flex w-full items-center justify-between gap-4 px-4 py-2.5 text-sm font-medium sm:px-6">
             <div class="flex min-w-0 items-center gap-3">
                 @if (setting('admissions_badge'))
                     <span class="shrink-0 rounded-md bg-white px-3 py-1 text-xs font-bold tracking-wide text-brand-700">{{ setting('admissions_badge') }}</span>
@@ -38,7 +38,7 @@
 
     {{-- Main navigation --}}
     <header class="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-lg" x-data="{ open: null }" @keydown.escape.window="open = null; menu = false">
-        <div class="wrap flex h-24 items-center justify-between gap-3 sm:gap-6">
+        <div class="flex h-[5.25rem] w-full items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6">
             <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-3">
                 <img src="{{ asset('images/logo.jpg') }}" alt="TT Metro Campus logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="leading-tight">
@@ -108,8 +108,8 @@
         </div>
 
         {{-- Mobile menu --}}
-        <div x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-9.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
-            <nav class="wrap space-y-1 py-4" aria-label="Mobile">
+        <div x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-8.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
+            <nav class="w-full space-y-1 px-4 py-4 sm:px-6" aria-label="Mobile">
                 @foreach ([['Home', route('home')], ['About Us', route('about')], ['Academics', route('academics')], ['Student Life', route('student-life')], ['Gallery', route('gallery')], ['Events', route('events')], ['Contact', route('contact')]] as [$label, $url])
                     <a href="{{ $url }}" class="block rounded-xl px-4 py-3 text-base font-semibold text-brand-700 hover:bg-sky-soft">{{ $label }}</a>
                 @endforeach
