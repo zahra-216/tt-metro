@@ -20,7 +20,7 @@ class SiteController extends Controller
 
     public function home()
     {
-        $faculties = Faculty::where('is_active', true)->withCount(['programmes' => fn ($q) => $q->where('is_active', true)])->orderBy('sort_order')->get();
+        $faculties = Faculty::visible()->withCount(['programmes' => fn ($q) => $q->where('is_active', true)])->orderBy('sort_order')->get();
 
         return view('home', [
             'stats' => Stat::where('is_active', true)->orderBy('sort_order')->get(),
@@ -46,7 +46,7 @@ class SiteController extends Controller
 
     public function academics(Request $request)
     {
-        $faculties = Faculty::where('is_active', true)->orderBy('sort_order')->get();
+        $faculties = Faculty::visible()->orderBy('sort_order')->get();
 
         $programmes = Programme::with('faculty')->where('is_active', true)
             ->when($request->filled('faculty'), fn ($q) => $q->whereHas('faculty', fn ($f) => $f->where('slug', $request->faculty)))
@@ -56,12 +56,19 @@ class SiteController extends Controller
             ->paginate(12)
             ->withQueryString();
 
-        return view('academics', ['faculties' => $faculties, 'programmes' => $programmes, 'levels' => self::LEVELS]);
+        // only levels that still have a programme to show
+        $activeLevels = Programme::where('is_active', true)->pluck('level')->unique();
+        $levels = array_values(array_filter(self::LEVELS, fn ($l) => $activeLevels->contains($l)));
+
+        return view('academics', ['faculties' => $faculties, 'programmes' => $programmes, 'levels' => $levels]);
     }
 
     public function programme(Programme $programme)
     {
-        abort_unless($programme->is_active, 404);
+        // A programme that is switched off (no longer offered): send visitors to the list instead of an error page.
+        if (! $programme->is_active) {
+            return redirect()->route('academics');
+        }
 
         return view('programme', [
             'programme' => $programme->load('faculty'),

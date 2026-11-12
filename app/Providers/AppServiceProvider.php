@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('layouts.app', function ($view) {
-            $view->with('navFaculties', Schema::hasTable('faculties') ? Faculty::where('is_active', true)->orderBy('sort_order')->get() : collect());
+            $view->with('navFaculties', Schema::hasTable('faculties') ? Faculty::visible()->orderBy('sort_order')->get() : collect());
         });
 
         // Admin success and error messages close on their own after 3 seconds.

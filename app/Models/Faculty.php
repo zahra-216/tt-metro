@@ -16,5 +16,12 @@ class Faculty extends Model
     {
         return $this->hasMany(Programme::class);
     }
+
+    /** Faculties to show on the public site: switched on AND with at least one active programme. */
+    public function scopeVisible($query)
+    {
+        return $query->where('is_active', true)
+            ->whereHas('programmes', fn ($q) => $q->where('is_active', true));
+    }
 }
 

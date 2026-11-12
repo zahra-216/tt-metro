@@ -29,7 +29,7 @@ Route::controller(FormController::class)->middleware('throttle:6,1')->group(func
 });
 
 // Addresses from the old WordPress site, kept alive so Google results, bookmarks and shared links still work.
-Route::get('/courses/{slug}', fn (string $slug) => redirect(Programme::where('slug', $slug)->exists() ? route('programme', $slug) : route('academics'), 301));
+Route::get('/courses/{slug}', fn (string $slug) => redirect(Programme::where('slug', $slug)->where('is_active', true)->exists() ? route('programme', $slug) : route('academics'), 301));
 Route::get('/event/{slug}', function (string $slug) {
     $clean = Str::slug(urldecode($slug)); // old event links sometimes carried emoji
 

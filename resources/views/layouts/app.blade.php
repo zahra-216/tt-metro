@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ trim($__env->yieldContent('title')) ?: 'TT Metro Campus - Higher Education Institute, Sri Lanka' }}</title>
-    <meta name="description" content="@yield('description', 'TT Metro Campus is a leading higher education institute in Mount Lavinia, Sri Lanka, offering Diploma, HND, Degree and Postgraduate programmes.')">
+    <meta name="description" content="@yield('description', 'TT Metro Campus is a leading higher education institute in Mount Lavinia, Sri Lanka, offering '.levels_sentence(offered_levels()).' programmes.')">
     <meta name="theme-color" content="#0a2a52">
     <link rel="icon" href="{{ asset('images/logo.jpg') }}">
     @fonts

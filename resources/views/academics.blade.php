@@ -2,7 +2,7 @@
 @section('title', 'Academics - TT Metro Campus')
 
 @section('content')
-<x-page-header title="Academics" subtitle="Diploma, HND, Top-up, Degree and Postgraduate programmes across {{ $faculties->count() }} faculties." />
+<x-page-header title="Academics" subtitle="{{ levels_sentence($levels) }} programmes across {{ $faculties->count() }} {{ Str::plural('faculty', $faculties->count()) }}." />
 
 <section class="section">
     <div class="wrap">

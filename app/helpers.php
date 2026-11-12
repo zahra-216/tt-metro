@@ -34,6 +34,29 @@ if (! function_exists('whatsapp_url')) {
     }
 }
 
+if (! function_exists('offered_levels')) {
+    /** The levels that still have at least one active programme, in the usual order (Diploma, HND, ...). */
+    function offered_levels(): array
+    {
+        static $levels = null;
+
+        return $levels ??= array_values(array_filter(
+            App\Http\Controllers\SiteController::LEVELS,
+            fn ($l) => in_array($l, \App\Models\Programme::where('is_active', true)->pluck('level')->unique()->all(), true)
+        ));
+    }
+}
+
+if (! function_exists('levels_sentence')) {
+    /** ["Diploma", "HND", "Degree"] -> "Diploma, HND and Degree" */
+    function levels_sentence(array $levels): string
+    {
+        return count($levels) > 1
+            ? implode(', ', array_slice($levels, 0, -1)).' and '.end($levels)
+            : (string) ($levels[0] ?? '');
+    }
+}
+
 if (! function_exists('keep_name')) {
     /** Escapes a heading and stops "TT Metro Campus" from being split across two lines. */
     function keep_name(?string $text): Illuminate\Support\HtmlString
