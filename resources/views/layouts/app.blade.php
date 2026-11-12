@@ -186,5 +186,15 @@
             </div>
         </div>
     </footer>
+
+    {{-- Floating WhatsApp chat button --}}
+    @php($waUrl = whatsapp_url('Hello TT Metro Campus, I would like to know more about your programmes.'))
+    @if ($waUrl)
+        <a href="{{ $waUrl }}" target="_blank" rel="noopener" aria-label="Chat with TT Metro Campus on WhatsApp"
+           class="group fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex items-center gap-3 sm:right-6 sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))]">
+            <span class="pointer-events-none hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-navy-950 opacity-0 shadow-lg transition group-hover:opacity-100 group-focus-visible:opacity-100 md:block">Chat on WhatsApp</span>
+            <span class="grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg ring-4 ring-white/80 transition group-hover:scale-105 group-hover:bg-[#1ebe5b]"><x-ico name="whatsapp" class="h-8 w-8" /></span>
+        </a>
+    @endif
 </body>
 </html>

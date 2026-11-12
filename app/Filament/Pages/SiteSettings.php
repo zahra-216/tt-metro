@@ -40,7 +40,7 @@ class SiteSettings extends Page
     private const KEYS = [
         'hero_title', 'hero_subtitle', 'hero_image', 'welcome_title', 'welcome_text',
         'admissions_badge', 'admissions_text', 'apply_email',
-        'phone_1', 'phone_2', 'phone_landline', 'email_1', 'email_2', 'address', 'opening_hours', 'map_embed_url',
+        'phone_1', 'phone_2', 'phone_landline', 'whatsapp_number', 'email_1', 'email_2', 'address', 'opening_hours', 'map_embed_url',
         'student_portal_url', 'staff_portal_url', 'verify_url',
         'facebook', 'instagram', 'youtube', 'linkedin', 'tiktok',
         'chairman_message', 'chairman_image', 'vision', 'mission', 'motto', 'what_we_do', 'program_options', 'registrations', 'satellite', 'values',
@@ -76,6 +76,10 @@ class SiteSettings extends Page
                 TextInput::make('phone_1'),
                 TextInput::make('phone_2'),
                 TextInput::make('phone_landline'),
+                TextInput::make('whatsapp_number')
+                    ->label('WhatsApp number')
+                    ->placeholder('+94 77 227 0348')
+                    ->helperText('The green WhatsApp button on every page opens a chat with this number. Include the country code. Leave empty to use +94 77 227 0348.'),
                 TextInput::make('opening_hours'),
                 TextInput::make('email_1')->email(),
                 TextInput::make('email_2')->email(),
