@@ -43,10 +43,13 @@
                         <h2 class="text-lg font-bold">Modules</h2>
                         <span class="text-xs text-muted">{{ collect($semesters)->flatten()->count() }} modules</span>
                     </div>
-                    <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Semesters">
-                        @foreach ($semesters as $n => $mods)
-                            <button type="button" role="tab" @click="sem = {{ $n }}" :aria-selected="sem === {{ $n }}" :class="sem === {{ $n }} ? 'bg-brand-700 text-white shadow' : 'bg-surface text-navy-900 hover:bg-sky-soft'" class="rounded-full px-4 py-2 text-sm font-semibold transition">Sem {{ $n }}</button>
-                        @endforeach
+                    <div class="mt-4 flex items-center gap-3">
+                        <span class="shrink-0 text-sm font-semibold text-muted">Sem</span>
+                        <div class="flex min-w-0 flex-1 gap-1.5" role="tablist" aria-label="Semesters">
+                            @foreach ($semesters as $n => $mods)
+                                <button type="button" role="tab" aria-label="Semester {{ $n }}" @click="sem = {{ $n }}" :aria-selected="sem === {{ $n }}" :class="sem === {{ $n }} ? 'bg-brand-700 text-white shadow' : 'bg-surface text-navy-900 hover:bg-sky-soft'" class="grid aspect-square min-w-0 max-w-10 flex-1 place-items-center rounded-full text-sm font-semibold transition">{{ $n }}</button>
+                            @endforeach
+                        </div>
                     </div>
                     @foreach ($semesters as $n => $mods)
                         <div x-cloak x-show="sem === {{ $n }}" role="tabpanel" class="mt-5">
