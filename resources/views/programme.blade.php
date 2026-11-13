@@ -36,6 +36,30 @@
                     <a href="{{ media($programme->brochure) }}" target="_blank" class="btn btn-ghost mt-3 w-full"><x-ico name="download" class="h-4 w-4" /> Download brochure</a>
                 @endif
             </div>
+            @php($semesters = $programme->modulesBySemester())
+            @if ($semesters)
+                <div class="card p-7" x-data="{ sem: {{ array_key_first($semesters) }} }">
+                    <div class="flex items-center justify-between gap-3">
+                        <h2 class="text-lg font-bold">Modules</h2>
+                        <span class="text-xs text-muted">{{ collect($semesters)->flatten()->count() }} modules</span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Semesters">
+                        @foreach ($semesters as $n => $mods)
+                            <button type="button" role="tab" @click="sem = {{ $n }}" :aria-selected="sem === {{ $n }}" :class="sem === {{ $n }} ? 'bg-brand-700 text-white shadow' : 'bg-surface text-navy-900 hover:bg-sky-soft'" class="rounded-full px-4 py-2 text-sm font-semibold transition">Sem {{ $n }}</button>
+                        @endforeach
+                    </div>
+                    @foreach ($semesters as $n => $mods)
+                        <div x-cloak x-show="sem === {{ $n }}" role="tabpanel" class="mt-5">
+                            <p class="text-xs font-semibold uppercase tracking-wider text-muted">Semester {{ $n }} - {{ count($mods) }} {{ \Illuminate\Support\Str::plural('module', count($mods)) }}</p>
+                            <ol class="mt-3 space-y-2.5 text-left text-sm">
+                                @foreach ($mods as $i => $m)
+                                    <li class="flex gap-3"><span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-soft text-xs font-bold text-brand-700">{{ $i + 1 }}</span><span class="text-left text-navy-900">{{ $m }}</span></li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
             <div class="rounded-2xl bg-navy-900 p-7 text-white">
                 <h3 class="text-lg font-bold text-white">Need advice?</h3>
                 <p class="mt-2 text-sm text-white/75">Speak to our admissions team about entry requirements, fees and intakes.</p>

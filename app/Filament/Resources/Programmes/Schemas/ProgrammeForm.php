@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Programmes\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Select;
@@ -28,6 +29,27 @@ class ProgrammeForm
                 TextInput::make('duration'),
                 TextInput::make('awarding_body'),
                 TagsInput::make('requirements'),
+                Repeater::make('modules')
+                    ->label('Modules (shown on the programme page, one tab per semester)')
+                    ->helperText('Add each module with its semester. Modules of the same semester appear together, in the order listed here.')
+                    ->columnSpanFull()
+                    ->defaultItems(0)
+                    ->addActionLabel('Add module')
+                    ->reorderable()
+                    ->collapsible()
+                    ->itemLabel(fn (array $state): ?string => filled($state['title'] ?? null)
+                        ? 'Semester '.($state['semester'] ?? '?').' - '.$state['title']
+                        : null)
+                    ->schema([
+                        Select::make('semester')
+                            ->options(collect(range(1, 8))->mapWithKeys(fn ($n) => [$n => 'Semester '.$n])->all())
+                            ->required(),
+                        TextInput::make('title')
+                            ->label('Module name')
+                            ->required()
+                            ->maxLength(200),
+                    ])
+                    ->columns(2),
                 FileUpload::make('brochure')->directory('brochures')->acceptedFileTypes(['application/pdf']),
                 Textarea::make('summary')
                     ->columnSpanFull(),
