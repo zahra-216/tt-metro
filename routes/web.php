@@ -26,6 +26,7 @@ Route::controller(SiteController::class)->group(function () {
 Route::controller(FormController::class)->middleware('throttle:6,1')->group(function () {
     Route::post('/apply', 'apply')->name('apply.submit');
     Route::post('/contact', 'contact')->name('contact.submit');
+    Route::post('/programmes/{programme:slug}/advice', 'advice')->name('programme.advice');
 });
 
 // Addresses from the old WordPress site, kept alive so Google results, bookmarks and shared links still work.
