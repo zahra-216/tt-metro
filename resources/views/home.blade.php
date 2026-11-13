@@ -13,10 +13,10 @@
     <div class="absolute inset-0 -z-10 bg-gradient-to-b from-navy-950/40 via-transparent to-navy-950/80"></div>
     <div class="wrap grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:py-36">
         <div class="lg:col-span-8">
-            <span class="reveal inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest backdrop-blur">
-                <span class="h-1.5 w-1.5 rounded-full bg-sky-brand"></span> Best higher education network in Sri Lanka
+            <span class="reveal inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[clamp(8.5px,2.75vw,12px)] font-semibold uppercase tracking-wide backdrop-blur sm:px-4 sm:text-xs sm:tracking-widest">
+                <span class="hidden h-1.5 w-1.5 rounded-full bg-sky-brand sm:inline-block"></span> Best higher education network in Sri Lanka
             </span>
-            <h1 class="reveal mt-6 text-4xl font-extrabold leading-[1.08] text-white sm:text-6xl" style="animation-delay:.08s">{{ keep_name(setting('hero_title')) }}</h1>
+            <h1 class="reveal mt-6 text-4xl font-extrabold leading-[1.08] text-white max-[399px]:text-[2rem] sm:text-6xl" style="animation-delay:.08s">{{ keep_name(setting('hero_title')) }}</h1>
             <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-white/80" style="animation-delay:.16s">{{ setting('hero_subtitle') }}</p>
             <div class="reveal mt-9 flex flex-wrap gap-3" style="animation-delay:.24s">
                 <a href="{{ route('apply') }}" class="btn btn-light px-7 py-3.5">Apply Now <x-ico name="arrow" class="h-4 w-4" /></a>

@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
+import './typeset';
 
 window.Alpine = Alpine;
 Alpine.plugin(collapse);

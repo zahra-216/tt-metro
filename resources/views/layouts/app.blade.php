@@ -43,7 +43,7 @@
                 <img src="{{ asset('images/logo.jpg') }}" alt="TT Metro Campus logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="leading-tight">
                     <span class="block whitespace-nowrap font-display text-[17px] font-extrabold tracking-tight text-brand-700 min-[400px]:text-xl sm:text-[26px] 2xl:text-[32px]">TT METRO CAMPUS</span>
-                    <span class="mt-0.5 hidden whitespace-nowrap text-[13px] font-medium tracking-wide text-muted sm:block">Empowering Minds, Shaping Futures.</span>
+                    <span class="mt-0.5 block whitespace-nowrap text-[9.5px] font-medium tracking-normal text-muted min-[400px]:text-[11px] sm:text-[13px] sm:tracking-wide">Empowering Minds, Shaping Futures.</span>
                 </span>
             </a>
 
@@ -99,7 +99,7 @@
                     <label class="sr-only" for="nav-search">Search programmes</label>
                     <input id="nav-search" name="q" type="search" placeholder="Search programmes…" class="h-11 w-40 rounded-full border border-transparent bg-surface px-5 text-sm outline-none transition focus:w-56 focus:border-brand-600 focus:bg-white">
                 </form>
-                <a href="{{ route('academics') }}" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 transition hover:bg-sky-soft 2xl:hidden" aria-label="Search programmes"><x-ico name="search" /></a>
+                <a href="{{ route('academics') }}" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 transition hover:bg-sky-soft max-[359px]:hidden 2xl:hidden" aria-label="Search programmes"><x-ico name="search" /></a>
                 <a href="{{ route('apply') }}" class="btn btn-primary hidden whitespace-nowrap sm:inline-flex">Apply Now</a>
                 <button type="button" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 xl:hidden" @click="menu = !menu" :aria-expanded="menu" aria-label="Toggle menu">
                     <x-ico name="menu" x-show="!menu" /><x-ico name="x" x-cloak x-show="menu" />

@@ -31,8 +31,15 @@
     h1, h2, h3, h4 { @apply font-display tracking-tight text-navy-900; }
     [x-cloak] { display: none !important; }
 
-    /* Body copy is justified; anything inside a centred or right-aligned block keeps that alignment. */
-    main p, main li, footer p { text-align: justify; hyphens: none; }
+    /*
+     * Body copy starts left-aligned. resources/js/typeset.js justifies a paragraph only when it has 4 or more
+     * lines and the gaps between its words stay small (it nudges the font size by up to 1px to get there).
+     * data-fit: "m" = being measured, "j" = justified, "l" = left-aligned (short or gappy).
+     * Anything inside a centred or right-aligned block keeps that alignment.
+     */
+    main p, main li, footer p, [data-typeset] { text-align: left; hyphens: none; text-wrap: pretty; }
+    :is(main p, main li, footer p, [data-typeset])[data-fit='m'] { text-align: left; hyphens: auto; }
+    :is(main p, main li, footer p, [data-typeset])[data-fit='j'] { text-align: justify; hyphens: auto; }
     .text-center :is(p, li) { text-align: center; }
     .text-right :is(p, li) { text-align: right; }
 }

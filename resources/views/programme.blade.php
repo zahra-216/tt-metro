@@ -17,7 +17,7 @@
                 <h2 class="mt-10 text-2xl font-extrabold">Entry requirements</h2>
                 <ul class="mt-5 space-y-3">
                     @foreach ($programme->requirements as $r)
-                        <li class="flex gap-3 text-muted"><span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-soft text-brand-700"><x-ico name="check" class="h-3.5 w-3.5" /></span>{{ $r }}</li>
+                        <li class="flex gap-3 text-muted"><span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-soft text-brand-700"><x-ico name="check" class="h-3.5 w-3.5" /></span><span data-typeset class="min-w-0 flex-1">{{ $r }}</span></li>
                     @endforeach
                 </ul>
             @endif
