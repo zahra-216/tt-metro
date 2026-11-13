@@ -4,16 +4,21 @@
  * Paragraphs are left-aligned by default. A paragraph (or list item) is justified only when:
  *   - it has 4 or more lines, and
  *   - the extra space added between its words stays small.
- * To get there the font size is nudged by up to 1.5px either way. If no size gives tidy spacing, the paragraph
+ * To get there the font size is nudged by up to half a pixel either way and the letter spacing by a fraction
+ * of a pixel (too small to see, but enough to change where lines break). If no size gives tidy spacing, the paragraph
  * stays left-aligned, so a long gap between words never shows.
  *
  * It re-runs when the window is resized or turned, and after a click (tabs and accordions reveal hidden text).
  */
+import { softHyphenate } from './hyphenation-en';
+
 const SELECTOR = 'main p, main li, footer p, [data-typeset]';
 const MIN_LINES = 4;
-const NUDGES = [0, -0.25, 0.25, -0.5, 0.5, -0.75, 0.75, -1, 1, -1.25, 1.25, -1.5, 1.5]; // px around the normal font size
-const GOOD = 0.32;  // extra width added to each gap, as a fraction of the font size: tidy
-const LIMIT = 0.5;  // the worst gap accepted when no size reaches GOOD (a normal gap is about 0.27)
+const NUDGES = [0, -0.25, 0.25, -0.5, 0.5]; // px around the normal font size (small, so neighbouring paragraphs look alike)
+const LETTER_SPACING = [0, 0.1, -0.1, 0.2, -0.2, 0.3, -0.3]; // px: tried only when font sizes alone are not tidy enough
+const GOOD = 0.4;   // extra width added to each gap, as a fraction of the font size: tidy
+const LIMIT = 0.6;  // the worst gap accepted when nothing reaches GOOD (a normal gap is about 0.27)
+const TIME_BUDGET = 1500; // ms for the whole page before the letter-spacing search is skipped (slow phones)
 
 const doneAt = new WeakMap(); // element -> its width when it was last typeset
 
@@ -76,8 +81,38 @@ function measure(el) {
     return { lines: lines.length, worst };
 }
 
+function hyphenate(el) {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (node.nodeValue.includes('­')) continue; // already done
+        const next = softHyphenate(node.nodeValue);
+        if (next !== node.nodeValue) node.nodeValue = next;
+    }
+}
+
+let deadline = Infinity; // on a slow phone, stop the extra letter-spacing search after this moment
+
+/** Try font sizes (then, if needed, tiny letter-spacing changes too) and keep the one with the tidiest gaps. */
+function search(el, base) {
+    let best = null;
+    for (const spacing of LETTER_SPACING) {
+        if (spacing && performance.now() > deadline) break;
+        el.style.letterSpacing = spacing ? spacing + 'px' : '';
+        for (const d of NUDGES) {
+            el.style.fontSize = (base + d) + 'px';
+            const r = measure(el);
+            if (!r || r.lines < MIN_LINES) continue;
+            if (!best || r.worst < best.worst) best = { d, spacing, worst: r.worst };
+            if (r.worst <= GOOD) return best;
+        }
+        if (best && best.worst <= GOOD) break;
+    }
+    return best;
+}
+
 function typeset(el) {
     el.style.fontSize = '';
+    el.style.letterSpacing = '';
     delete el.dataset.fit;
     if (!eligible(el)) return;
 
@@ -89,20 +124,19 @@ function typeset(el) {
 
     if (first.lines < MIN_LINES) { el.dataset.fit = 'l'; return; }
 
-    let best = null;
-    for (const d of NUDGES) {
-        el.style.fontSize = (base + d) + 'px';
-        const r = measure(el);
-        if (!r || r.lines < MIN_LINES) continue;
-        if (r.worst <= GOOD) { best = { d, worst: r.worst }; break; }
-        if (!best || r.worst < best.worst) best = { d, worst: r.worst };
-    }
+    // Long enough to justify: let long words split across lines (invisible soft hyphens at known syllable
+    // breaks), so the spaces between words stay even. Left-aligned text ignores them.
+    hyphenate(el);
+
+    const best = search(el, base);
 
     if (best && best.worst <= LIMIT) {
         el.style.fontSize = best.d === 0 ? '' : (base + best.d) + 'px';
+        el.style.letterSpacing = best.spacing ? best.spacing + 'px' : '';
         el.dataset.fit = 'j';
     } else {
         el.style.fontSize = '';
+        el.style.letterSpacing = '';
         el.dataset.fit = 'l';
     }
 }
@@ -118,6 +152,8 @@ let running = false;
 async function run(all = false) {
     if (running) return;
     running = true;
+    const startedAt = performance.now();
+    deadline = startedAt + TIME_BUDGET;
     const todo = [...document.querySelectorAll(SELECTOR)].filter((el) => all
         || !doneAt.has(el)
         || Math.abs(doneAt.get(el) - el.getBoundingClientRect().width) > 0.5);
@@ -127,6 +163,7 @@ async function run(all = false) {
         if (todo.length) await yieldNow();
     }
     running = false;
+    document.documentElement.dataset.typesetMs = Math.round(performance.now() - startedAt);
     document.documentElement.dataset.typesetReady = 'done';
 }
 
