@@ -90,7 +90,7 @@ class SiteSettings extends Page
                     ->rows(2)
                     ->columnSpanFull(),
             ]),
-            Section::make('About page')->collapsed()->columns(2)->schema([
+            Section::make('About page')->description('The words of the About Us page. To hide a part of the page, use Site > Show / hide sections.')->collapsed()->columns(2)->schema([
                 FileUpload::make('chairman_image')->image()->directory('about'),
                 RichEditor::make('chairman_message')->label('Message from the Founder Chairman')->columnSpanFull(),
                 Textarea::make('vision')->rows(3),
@@ -102,7 +102,7 @@ class SiteSettings extends Page
                 RichEditor::make('satellite')->label('Satellite centre opportunity')->columnSpanFull(),
                 RichEditor::make('values')->columnSpanFull(),
             ]),
-            Section::make('Introductions (people, partners, student life)')->collapsed()->columns(1)->schema([
+            Section::make('Introductions (people, partners, student life)')->description('Short texts above the team, partner, facilities and scholarship lists. To hide those parts, use Site > Show / hide sections.')->collapsed()->columns(1)->schema([
                 RichEditor::make('intro_council')->label('Governing Council'),
                 RichEditor::make('intro_senate')->label('Academic Senate'),
                 RichEditor::make('intro_staff')->label('Academic & Management Staff'),

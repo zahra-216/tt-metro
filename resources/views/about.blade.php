@@ -11,6 +11,7 @@
 <x-page-header title="About Us" subtitle="An innovative higher education institute established in 2015 in Sri Lanka." />
 
 {{-- Story + stats --}}
+@if (section_on('about.story'))
 <section class="section">
     <div class="wrap grid gap-12 lg:grid-cols-5 lg:gap-16">
         <div class="lg:col-span-3">
@@ -28,9 +29,10 @@
         </div>
     </div>
 </section>
+@endif
 
 {{-- Chairman --}}
-@if (setting('chairman_message'))
+@if (section_on('about.chairman') && setting('chairman_message'))
 <section class="section bg-surface">
     <div class="wrap grid items-center gap-12 lg:grid-cols-5">
         @if (setting('chairman_image'))
@@ -46,7 +48,7 @@
 @endif
 
 {{-- Vision / mission / motto --}}
-@if (setting('vision') || setting('mission') || setting('motto'))
+@if (section_on('about.vision') && (setting('vision') || setting('mission') || setting('motto')))
 <section class="section">
     <div class="wrap grid gap-6 md:grid-cols-3">
         @foreach (['vision' => 'Vision', 'mission' => 'Mission', 'motto' => 'Motto'] as $k => $label)
@@ -63,7 +65,10 @@
 @endif
 
 {{-- What we do etc. --}}
-@php $blocks = ['what_we_do' => 'What we do', 'program_options' => 'Programme options', 'registrations' => 'Registrations & partnerships', 'satellite' => 'Satellite centre opportunity', 'values' => 'Our values']; @endphp
+@php
+    $blocks = array_filter(['what_we_do' => 'What we do', 'program_options' => 'Programme options', 'registrations' => 'Registrations & partnerships', 'satellite' => 'Satellite centre opportunity', 'values' => 'Our values'], fn ($label, $k) => section_on('about.'.$k) && setting($k), ARRAY_FILTER_USE_BOTH);
+@endphp
+@if ($blocks)
 <section class="section bg-surface">
     <div class="wrap grid gap-6 md:grid-cols-2">
         @foreach ($blocks as $k => $label)
@@ -76,9 +81,10 @@
         @endforeach
     </div>
 </section>
+@endif
 
 {{-- People --}}
-@if ($tabs)
+@if (section_on('about.team') && $tabs)
 <section id="leadership" class="section" x-data="{ tab: '{{ request()->query('team', $first) }}' }">
     <div class="wrap">
         <div class="max-w-2xl"><span class="eyebrow">Our people</span><h2 class="h-section">The team behind <span class="whitespace-nowrap">TT Metro Campus</span></h2></div>
@@ -99,8 +105,8 @@
 </section>
 @endif
 
-{{-- Partners: hidden on request (18 Nov 2026). To show it again, change `false` to `$partners->isNotEmpty()` and restore the menu link in layouts/app.blade.php. --}}
-@if (false)
+{{-- Partners (logos): switched on or off in the admin, Site > Show / hide sections --}}
+@if (section_on('about.partners') && $partners->isNotEmpty())
 <section id="partners" class="section bg-surface">
     <div class="wrap">
         <div class="mx-auto max-w-3xl text-center">

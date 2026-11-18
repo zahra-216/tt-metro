@@ -37,7 +37,7 @@
                 @endif
             </div>
             @php($semesters = $programme->modulesBySemester())
-            @if ($semesters)
+            @if ($semesters && section_on('programme.modules'))
                 <div class="card p-7" x-data="{ sem: {{ array_key_first($semesters) }} }">
                     <div class="flex items-center justify-between gap-3">
                         <h2 class="text-lg font-bold">Modules</h2>
@@ -63,6 +63,7 @@
                     @endforeach
                 </div>
             @endif
+            @if (section_on('programme.advice'))
             <div id="advice" class="scroll-mt-28 rounded-2xl bg-navy-900 p-7 text-white">
                 <h3 class="text-lg font-bold text-white">Need advice?</h3>
                 <p class="mt-2 text-sm text-white/75">Speak to our admissions team about entry requirements, fees and intakes.</p>
@@ -100,11 +101,12 @@
 
                 <a href="tel:{{ preg_replace('/[^\d+]/', '', setting('phone_1')) }}" class="mt-5 inline-flex items-center gap-2 font-semibold hover:text-sky-brand"><x-ico name="phone" class="h-4 w-4" /> {{ setting('phone_1') }}</a>
             </div>
+            @endif
         </aside>
     </div>
 </section>
 
-@if ($related->isNotEmpty())
+@if (section_on('programme.related') && $related->isNotEmpty())
 <section class="section bg-surface">
     <div class="wrap">
         <h2 class="text-2xl font-extrabold sm:text-3xl">Related programmes</h2>

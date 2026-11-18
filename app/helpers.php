@@ -11,6 +11,14 @@ if (! function_exists('setting')) {
     }
 }
 
+if (! function_exists('section_on')) {
+    /** Is a website section switched on in the admin ("Show / hide sections")? Unknown keys count as shown. */
+    function section_on(string $key): bool
+    {
+        return \App\Support\Sections::on($key);
+    }
+}
+
 if (! function_exists('whatsapp_url')) {
     /**
      * Link that opens a WhatsApp chat with the campus number (admin "Site settings", else the default below).

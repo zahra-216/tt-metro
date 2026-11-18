@@ -6,7 +6,7 @@
 @php $facilities = $items['facility'] ?? collect(); $scholarships = $items['scholarship'] ?? collect(); @endphp
 
 {{-- Facilities --}}
-@if ($facilities->isNotEmpty())
+@if (section_on('student_life.facilities') && $facilities->isNotEmpty())
 <section id="facility" class="section">
     <div class="wrap">
         <div class="max-w-3xl"><span class="eyebrow">Campus facilities</span><h2 class="h-section">Learning beyond the classroom</h2>
@@ -32,7 +32,7 @@
 @endif
 
 {{-- Scholarships --}}
-@if ($scholarships->isNotEmpty())
+@if (section_on('student_life.scholarships') && $scholarships->isNotEmpty())
 <section id="scholarship" class="section bg-surface" x-data="{ open: null }">
     <div class="wrap max-w-5xl">
         <div class="max-w-3xl"><span class="eyebrow">Scholarships</span><h2 class="h-section">Study abroad with funding support</h2>
@@ -54,6 +54,7 @@
 @endif
 
 {{-- Services --}}
+@if (section_on('student_life.services'))
 <section id="services" class="section">
     <div class="wrap">
         <div class="max-w-3xl"><span class="eyebrow">Student services</span><h2 class="h-section">Everything you need, online</h2></div>
@@ -74,4 +75,5 @@
         @endforeach
     </div>
 </section>
+@endif
 @endsection

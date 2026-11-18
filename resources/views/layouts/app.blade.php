@@ -59,7 +59,8 @@
                     <div x-cloak x-show="open === 'about'" x-transition.opacity class="absolute left-0 top-full w-60 pt-2">
                         <div class="rounded-2xl border border-line bg-white p-2 shadow-lift">
                             <a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}">Our Story</a>
-                            <a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}#leadership">Leadership</a>
+                            @if (section_on('about.team'))<a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}#leadership">Leadership</a>@endif
+                            @if (section_on('about.partners'))<a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}#partners">Partners &amp; Affiliations</a>@endif
                         </div>
                     </div>
                 </div>
@@ -82,6 +83,7 @@
                     <div x-cloak x-show="open === 'life'" x-transition.opacity class="absolute left-0 top-full w-56 pt-2">
                         <div class="rounded-2xl border border-line bg-white p-2 shadow-lift">
                             @foreach (['facility' => 'Facilities', 'scholarship' => 'Scholarships', 'services' => 'Student Services'] as $key => $label)
+                                @continue(! section_on(['facility' => 'student_life.facilities', 'scholarship' => 'student_life.scholarships', 'services' => 'student_life.services'][$key]))
                                 <a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('student-life') }}#{{ $key }}">{{ $label }}</a>
                             @endforeach
                         </div>

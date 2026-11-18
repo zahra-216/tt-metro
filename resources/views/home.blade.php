@@ -35,7 +35,7 @@
 </section>
 
 {{-- Stats --}}
-@if ($stats->isNotEmpty())
+@if (section_on('home.stats') && $stats->isNotEmpty())
 <section class="relative z-10 -mt-12" aria-label="Campus at a glance">
     <div class="wrap">
         <div class="card grid grid-cols-2 divide-line p-2 shadow-lift lg:grid-cols-4 lg:divide-x">
@@ -51,6 +51,7 @@
 @endif
 
 {{-- Welcome --}}
+@if (section_on('home.welcome'))
 <section class="section">
     <div class="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div class="reveal">
@@ -75,8 +76,10 @@
         </div>
     </div>
 </section>
+@endif
 
 {{-- Faculties --}}
+@if (section_on('home.faculties'))
 <section class="section bg-surface">
     <div class="wrap">
         <div class="reveal max-w-2xl">
@@ -101,8 +104,10 @@
         </div>
     </div>
 </section>
+@endif
 
 {{-- Popular programmes --}}
+@if (section_on('home.programmes'))
 <section class="section">
     <div class="wrap">
         <div class="flex flex-wrap items-end justify-between gap-4">
@@ -117,9 +122,10 @@
         </div>
     </div>
 </section>
+@endif
 
 {{-- Events --}}
-@if ($events->isNotEmpty())
+@if (section_on('home.events') && $events->isNotEmpty())
 <section class="section bg-surface">
     <div class="wrap">
         <div class="flex flex-wrap items-end justify-between gap-4">
@@ -137,7 +143,7 @@
 @endif
 
 {{-- Board --}}
-@if ($board->isNotEmpty())
+@if (section_on('home.board') && $board->isNotEmpty())
 <section class="section">
     <div class="wrap">
         <div class="reveal mx-auto max-w-2xl text-center">
@@ -154,7 +160,7 @@
 @endif
 
 {{-- Testimonials --}}
-@if ($testimonials->isNotEmpty())
+@if (section_on('home.testimonials') && $testimonials->isNotEmpty())
 <section class="section bg-navy-900 text-white">
     <div class="wrap">
         <div class="mx-auto max-w-2xl text-center">
@@ -174,6 +180,7 @@
 @endif
 
 {{-- CTA + map --}}
+@if (section_on('home.contact'))
 <section class="section">
     <div class="wrap">
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-navy-900 to-brand-600 p-10 text-white sm:p-14">
@@ -203,4 +210,5 @@
         <x-branches class="mt-20" />
     </div>
 </section>
+@endif
 @endsection

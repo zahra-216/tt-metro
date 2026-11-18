@@ -35,7 +35,7 @@
             </form>
         </div>
     </div>
-    <div class="wrap mt-12"><x-map /></div>
-    <x-branches class="wrap mt-16" />
+    @if (section_on('contact.map'))<div class="wrap mt-12"><x-map /></div>@endif
+    @if (section_on('contact.branches'))<x-branches class="wrap mt-16" />@endif
 </section>
 @endsection
