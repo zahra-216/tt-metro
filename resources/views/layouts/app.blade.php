@@ -54,6 +54,7 @@
                 @endphp
                 <a href="{{ route('home') }}" class="{{ $link }} {{ request()->routeIs('home') ? $active : '' }}">Home</a>
 
+                @if (section_on('page.about'))
                 <div class="relative" @mouseenter="open = 'about'" @mouseleave="open = null">
                     <a href="{{ route('about') }}" class="{{ $link }} {{ request()->routeIs('about') ? $active : '' }}">About Us <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
                     <div x-cloak x-show="open === 'about'" x-transition.opacity class="absolute left-0 top-full w-60 pt-2">
@@ -64,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <div class="relative" @mouseenter="open = 'academics'" @mouseleave="open = null">
                     <a href="{{ route('academics') }}" class="{{ $link }} {{ request()->routeIs('academics', 'programme') ? $active : '' }}">Academics <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
@@ -78,6 +80,7 @@
                     </div>
                 </div>
 
+                @if (section_on('page.student_life'))
                 <div class="relative" @mouseenter="open = 'life'" @mouseleave="open = null">
                     <a href="{{ route('student-life') }}" class="{{ $link }} {{ request()->routeIs('student-life') ? $active : '' }}">Student Life <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
                     <div x-cloak x-show="open === 'life'" x-transition.opacity class="absolute left-0 top-full w-56 pt-2">
@@ -89,9 +92,10 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
-                <a href="{{ route('gallery') }}" class="{{ $link }} {{ request()->routeIs('gallery', 'album') ? $active : '' }}">Gallery</a>
-                <a href="{{ route('events') }}" class="{{ $link }} {{ request()->routeIs('events', 'event', 'post') ? $active : '' }}">Events</a>
+                @if (section_on('page.gallery'))<a href="{{ route('gallery') }}" class="{{ $link }} {{ request()->routeIs('gallery', 'album') ? $active : '' }}">Gallery</a>@endif
+                @if (section_on('page.events'))<a href="{{ route('events') }}" class="{{ $link }} {{ request()->routeIs('events', 'event', 'post') ? $active : '' }}">Events</a>@endif
                 <a href="{{ route('contact') }}" class="{{ $link }} {{ request()->routeIs('contact') ? $active : '' }}">Contact</a>
             </nav>
 
@@ -112,6 +116,7 @@
         <div x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-8.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
             <nav class="w-full space-y-1 px-4 py-4 sm:px-6" aria-label="Mobile">
                 @foreach ([['Home', route('home')], ['About Us', route('about')], ['Academics', route('academics')], ['Student Life', route('student-life')], ['Gallery', route('gallery')], ['Events', route('events')], ['Contact', route('contact')]] as [$label, $url])
+                    @continue(! \App\Support\Sections::labelOn($label))
                     <a href="{{ $url }}" class="block rounded-xl px-4 py-3 text-base font-semibold text-brand-700 hover:bg-sky-soft">{{ $label }}</a>
                 @endforeach
                 <a href="{{ route('apply') }}" class="btn btn-primary mt-3 w-full">Apply Now</a>
@@ -149,6 +154,7 @@
                 <h3 class="font-display text-sm font-bold uppercase tracking-widest text-white">Quick Links</h3>
                 <ul class="mt-5 space-y-3 text-sm">
                     @foreach ([['Home', route('home')], ['About Us', route('about')], ['Academics', route('academics')], ['Student Life', route('student-life')], ['Gallery', route('gallery')], ['Events', route('events')], ['Contact Us', route('contact')], ['Apply Now', route('apply')]] as [$label, $url])
+                    @continue(! \App\Support\Sections::labelOn($label))
                         <li><a href="{{ $url }}" class="transition hover:text-sky-brand">{{ $label }}</a></li>
                     @endforeach
                 </ul>

@@ -61,7 +61,7 @@
                 @foreach (preg_split('/\R{2,}/', (string) setting('welcome_text')) as $para)<p>{{ $para }}</p>@endforeach
             </div>
             <div class="mt-8 flex flex-wrap gap-3">
-                <a href="{{ route('about') }}" class="btn btn-primary">Learn more about us</a>
+                @if (section_on('page.about'))<a href="{{ route('about') }}" class="btn btn-primary">Learn more about us</a>@endif
                 <a href="{{ route('contact') }}" class="btn btn-ghost">Talk to us</a>
             </div>
         </div>
@@ -125,7 +125,7 @@
 @endif
 
 {{-- Events --}}
-@if (section_on('home.events') && $events->isNotEmpty())
+@if (section_on('home.events') && section_on('page.events') && $events->isNotEmpty())
 <section class="section bg-surface">
     <div class="wrap">
         <div class="flex flex-wrap items-end justify-between gap-4">

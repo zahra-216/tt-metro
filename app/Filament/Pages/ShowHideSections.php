@@ -73,10 +73,14 @@ class ShowHideSections extends Page
             }
 
             $sections[] = Section::make($title)
-                ->description($title === 'Home page' ? 'The top banner of the home page always shows. Change its words in Site settings.' : null)
-                ->headerActions([
+                ->description(match ($title) {
+                    'Inside the Home page' => 'The top banner of the home page always shows. Change its words in Site settings.',
+                    'Whole pages (hide a page completely)' => 'Switch a page off and visitors who open its link go to the home page. Home, Academics (programmes), Contact and Apply always stay on.',
+                    default => null,
+                })
+                ->headerActions($page['route'] ? [
                     Action::make('view_'.$page['route'])->label('View page')->icon(Heroicon::OutlinedArrowTopRightOnSquare)->color('gray')->url(route($page['route']), shouldOpenInNewTab: true),
-                ])
+                ] : [])
                 ->columns(['default' => 1, 'lg' => 2])
                 ->schema($toggles);
         }

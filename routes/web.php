@@ -10,15 +10,15 @@ use Illuminate\Support\Str;
 
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'home')->name('home');
-    Route::get('/about', 'about')->name('about');
+    Route::get('/about', 'about')->name('about')->middleware('page:about');
     Route::get('/academics', 'academics')->name('academics');
     Route::get('/programmes/{programme:slug}', 'programme')->name('programme');
-    Route::get('/student-life', 'studentLife')->name('student-life');
-    Route::get('/gallery', 'gallery')->name('gallery');
-    Route::get('/gallery/{album:slug}', 'album')->name('album');
-    Route::get('/events', 'events')->name('events');
-    Route::get('/events/{event:slug}', 'event')->name('event');
-    Route::get('/news/{post:slug}', 'post')->name('post');
+    Route::get('/student-life', 'studentLife')->name('student-life')->middleware('page:student_life');
+    Route::get('/gallery', 'gallery')->name('gallery')->middleware('page:gallery');
+    Route::get('/gallery/{album:slug}', 'album')->name('album')->middleware('page:gallery');
+    Route::get('/events', 'events')->name('events')->middleware('page:events');
+    Route::get('/events/{event:slug}', 'event')->name('event')->middleware('page:events');
+    Route::get('/news/{post:slug}', 'post')->name('post')->middleware('page:events');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/apply', 'apply')->name('apply');
 });

@@ -13,14 +13,20 @@ use App\Models\Setting;
 class Sections
 {
     /**
-     * page title => [route name, [key => [label, what it is, shown by default]]]
+     * page title => [route name to preview (or null), [key => [label, what it is, shown by default]]]
      *
-     * @return array<string, array{route: string, items: array<string, array{0: string, 1: string, 2: bool}>}>
+     * @return array<string, array{route: ?string, items: array<string, array{0: string, 1: string, 2: bool}>}>
      */
     public static function all(): array
     {
         return [
-            'Home page' => ['route' => 'home', 'items' => [
+            'Whole pages (hide a page completely)' => ['route' => null, 'items' => [
+                'page.about' => ['About Us page', 'Hides the page, its menu links and the buttons that lead to it.', true],
+                'page.student_life' => ['Student Life page', 'Hides the page and its menu links.', true],
+                'page.gallery' => ['Gallery page', 'Hides the gallery and every album, and the menu links.', true],
+                'page.events' => ['Events and news pages', 'Hides the events list, every event and news article, the menu links and the events on the home page.', true],
+            ]],
+            'Inside the Home page' => ['route' => 'home', 'items' => [
                 'home.stats' => ['Numbers strip', 'The row of big numbers (students, programmes...) under the top banner.', true],
                 'home.welcome' => ['Welcome and why choose us', 'The welcome text with the four boxes: Quality Education, Expert Teachers...', true],
                 'home.faculties' => ['Faculties', 'The faculty cards: "Find the right path for your career".', true],
@@ -30,7 +36,7 @@ class Sections
                 'home.testimonials' => ['What our students say', 'The student testimonials.', true],
                 'home.contact' => ['Find us', 'The blue contact box, the map and the branches list.', true],
             ]],
-            'About Us page' => ['route' => 'about', 'items' => [
+            'Inside the About Us page' => ['route' => 'about', 'items' => [
                 'about.story' => ['Our story and numbers', 'The welcome text with the numbers beside it.', true],
                 'about.chairman' => ['Message from the Founder Chairman', 'The chairman message and photo.', true],
                 'about.vision' => ['Vision, Mission and Motto', 'The three boxes.', true],
@@ -42,21 +48,29 @@ class Sections
                 'about.team' => ['Our people (team)', 'The tabs: Board, Council, Senate, Staff and Lecturers.', true],
                 'about.partners' => ['Partners and affiliations (logos)', 'The grid of partner logos. Edit them under People > Partners.', false],
             ]],
-            'Student Life page' => ['route' => 'student-life', 'items' => [
+            'Inside the Student Life page' => ['route' => 'student-life', 'items' => [
                 'student_life.facilities' => ['Campus facilities', 'The facilities cards.', true],
                 'student_life.scholarships' => ['Scholarships', 'The scholarship list.', true],
                 'student_life.services' => ['Student services', 'The services cards.', true],
             ]],
-            'Contact page' => ['route' => 'contact', 'items' => [
+            'Inside the Contact page' => ['route' => 'contact', 'items' => [
                 'contact.map' => ['Map', 'The Google map.', true],
                 'contact.branches' => ['Branches', 'The list of other branches.', true],
             ]],
-            'Programme pages (every programme)' => ['route' => 'academics', 'items' => [
+            'Inside every programme page' => ['route' => 'academics', 'items' => [
                 'programme.modules' => ['Modules box', 'The semester tabs with the module lists.', true],
                 'programme.advice' => ['Need advice? box', 'The enquiry form and call buttons.', true],
                 'programme.related' => ['Related programmes', 'The cards at the bottom of a programme page.', true],
             ]],
         ];
+    }
+
+    /** Is the page behind a menu label (About Us, Student Life, Gallery, Events) switched on? Other labels always are. */
+    public static function labelOn(string $label): bool
+    {
+        $keys = ['About Us' => 'about', 'Student Life' => 'student_life', 'Gallery' => 'gallery', 'Events' => 'events'];
+
+        return ! isset($keys[$label]) || self::on('page.'.$keys[$label]);
     }
 
     /** Every key with its default. */
