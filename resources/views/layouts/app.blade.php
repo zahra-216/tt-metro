@@ -60,7 +60,6 @@
                         <div class="rounded-2xl border border-line bg-white p-2 shadow-lift">
                             <a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}">Our Story</a>
                             <a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}#leadership">Leadership</a>
-                            <a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}#partners">Partners &amp; Affiliations</a>
                         </div>
                     </div>
                 </div>

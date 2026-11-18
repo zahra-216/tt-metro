@@ -99,8 +99,8 @@
 </section>
 @endif
 
-{{-- Partners --}}
-@if ($partners->isNotEmpty())
+{{-- Partners: hidden on request (18 Nov 2026). To show it again, change `false` to `$partners->isNotEmpty()` and restore the menu link in layouts/app.blade.php. --}}
+@if (false)
 <section id="partners" class="section bg-surface">
     <div class="wrap">
         <div class="mx-auto max-w-3xl text-center">
