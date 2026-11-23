@@ -16,7 +16,7 @@ class SeoController extends Controller
 {
     public function sitemap()
     {
-        $urls = [['loc' => route('home')], ['loc' => route('academics')], ['loc' => route('contact')], ['loc' => route('apply')]];
+        $urls = [['loc' => route('home')], ['loc' => route('academics')], ['loc' => route('contact')], ['loc' => route('apply')], ['loc' => route('privacy')]];
 
         foreach (['about' => 'about', 'student_life' => 'student-life', 'gallery' => 'gallery', 'events' => 'events'] as $page => $route) {
             if (section_on('page.'.$page)) {

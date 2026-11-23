@@ -117,6 +117,11 @@ class SiteController extends Controller
         return view('post', ['post' => $post]);
     }
 
+    public function privacy()
+    {
+        return view('privacy');
+    }
+
     public function contact()
     {
         return view('contact');

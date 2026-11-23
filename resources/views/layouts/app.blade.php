@@ -205,7 +205,7 @@
         <div class="border-t border-white/10">
             <div class="wrap flex flex-col items-center justify-between gap-2 py-6 text-xs sm:flex-row">
                 <p>© {{ date('Y') }} TT Metro Campus. All rights reserved.</p>
-                <p>Higher Education Institute · Mount Lavinia, Sri Lanka</p>
+                <p class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1"><a href="{{ route('privacy') }}" class="font-semibold hover:text-sky-brand">Privacy Policy</a><span class="hidden sm:inline">·</span><span>Higher Education Institute · Mount Lavinia, Sri Lanka</span></p>
             </div>
         </div>
     </footer>

@@ -21,6 +21,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/news/{post:slug}', 'post')->name('post')->middleware('page:events');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/apply', 'apply')->name('apply');
+    Route::get('/privacy-policy', 'privacy')->name('privacy');
 });
 
 Route::get('/sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap'])->name('sitemap');
