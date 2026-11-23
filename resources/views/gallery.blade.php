@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Gallery - TT Metro Campus')
+@section('description', 'Photos from events, celebrations and campus life at TT Metro Campus, Sri Lanka.')
 
 @section('content')
 <x-page-header title="Gallery" subtitle="Moments from our campus - ceremonies, workshops, excursions and more." />

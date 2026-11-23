@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', $programme->title.' - TT Metro Campus')
 @section('description', \Illuminate\Support\Str::limit(strip_tags($programme->summary ?: $programme->title.' at TT Metro Campus, Mount Lavinia, Sri Lanka.'), 155))
+@section('og_image', (string) media($programme->image))
+@push('head')
+<script type="application/ld+json">{!! json_encode(['@'.'context' => 'https://schema.org', '@type' => 'Course', 'name' => $programme->title, 'description' => \Illuminate\Support\Str::limit(strip_tags($programme->summary ?: $programme->title.' at TT Metro Campus, Mount Lavinia, Sri Lanka.'), 300), 'url' => route('programme', $programme), 'provider' => ['@type' => 'CollegeOrUniversity', 'name' => 'TT Metro Campus', 'url' => url('/')]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+@endpush
 
 @section('content')
 <x-page-header :title="$programme->title" :subtitle="$programme->faculty?->name" crumb="Programme" />

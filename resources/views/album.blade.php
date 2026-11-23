@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', $album->title.' - Gallery')
+@section('og_image', (string) media($album->cover_image))
 
 @section('content')
 <x-page-header :title="$album->title" :subtitle="$album->description" crumb="Album" />

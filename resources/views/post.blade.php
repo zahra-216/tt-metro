@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('title', $post->title.' - TT Metro Campus')
+@section('description', \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags((string) $post->content))), 155))
+@section('og_image', (string) media($post->image))
 
 @section('content')
 <x-page-header :title="$post->title" crumb="News" />

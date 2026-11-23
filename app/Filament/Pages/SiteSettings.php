@@ -41,7 +41,7 @@ class SiteSettings extends Page
         'hero_title', 'hero_subtitle', 'hero_image', 'welcome_title', 'welcome_text',
         'admissions_badge', 'admissions_text', 'apply_email',
         'phone_1', 'phone_2', 'phone_landline', 'whatsapp_number', 'email_1', 'email_2', 'address', 'opening_hours', 'map_embed_url',
-        'student_portal_url', 'staff_portal_url', 'verify_url',
+        'student_portal_url', 'staff_portal_url', 'verify_url', 'google_site_verification', 'seo_description', 'seo_image',
         'facebook', 'instagram', 'youtube', 'linkedin', 'tiktok',
         'chairman_message', 'chairman_image', 'vision', 'mission', 'motto', 'what_we_do', 'program_options', 'registrations', 'satellite', 'values',
         'intro_council', 'intro_senate', 'intro_staff', 'intro_lecturers', 'intro_partners', 'intro_facilities', 'intro_scholarship',
@@ -110,6 +110,14 @@ class SiteSettings extends Page
                 RichEditor::make('intro_partners')->label('Affiliations & Partners'),
                 RichEditor::make('intro_facilities')->label('Facilities'),
                 RichEditor::make('intro_scholarship')->label('Scholarships'),
+            ]),
+            Section::make('Search engines (SEO)')->description('Helps Google find and show the website.')->columns(1)->schema([
+                TextInput::make('google_site_verification')->label('Google Search Console verification code')
+                    ->helperText('Google gives you this when you add the website in Search Console (choose the "HTML tag" option). Paste the whole tag or only the code that is inside content="...". Then click Verify in Google.'),
+                Textarea::make('seo_description')->label('Home page description for Google')->rows(3)->maxLength(300)
+                    ->helperText('One or two sentences shown under the website name in Google results. Leave empty for the standard text.'),
+                FileUpload::make('seo_image')->label('Picture shown when the link is shared (WhatsApp, Facebook)')->image()->directory('site')
+                    ->helperText('Wide picture, at least 1200 x 630 pixels. Leave empty to use the logo.'),
             ]),
             Section::make('Portals & links')->columns(2)->schema([
                 TextInput::make('student_portal_url')->url(),

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', $event->title.' - TT Metro Campus')
 @section('description', \Illuminate\Support\Str::limit(strip_tags((string) $event->excerpt), 155))
+@section('og_image', (string) media($event->image))
 
 @section('content')
 @php

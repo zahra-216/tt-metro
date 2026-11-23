@@ -23,6 +23,8 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/apply', 'apply')->name('apply');
 });
 
+Route::get('/sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap'])->name('sitemap');
+
 Route::controller(FormController::class)->middleware('throttle:6,1')->group(function () {
     Route::post('/apply', 'apply')->name('apply.submit');
     Route::post('/contact', 'contact')->name('contact.submit');

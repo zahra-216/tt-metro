@@ -3,8 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ trim($__env->yieldContent('title')) ?: 'TT Metro Campus - Higher Education Institute, Sri Lanka' }}</title>
-    <meta name="description" content="@yield('description', 'TT Metro Campus is a leading higher education institute in Mount Lavinia, Sri Lanka, offering '.levels_sentence(offered_levels()).' programmes.')">
+    @php
+        $seoTitle = trim($__env->yieldContent('title')) ?: 'TT Metro Campus - Higher Education Institute, Sri Lanka';
+        $seoDesc = trim($__env->yieldContent('description')) ?: (setting('seo_description') ?: 'TT Metro Campus is a leading higher education institute in Mount Lavinia, Sri Lanka, offering '.levels_sentence(offered_levels()).' programmes.');
+        $seoImage = trim($__env->yieldContent('og_image')) ?: (media(setting('seo_image')) ?: asset('images/logo.jpg'));
+        $seoUrl = url()->current();
+    @endphp
+    <title>{{ $seoTitle }}</title>
+    <meta name="description" content="{{ $seoDesc }}">
+    <link rel="canonical" href="{{ $seoUrl }}">
+    @if (seo_verification())<meta name="google-site-verification" content="{{ seo_verification() }}">@endif
+    <meta property="og:site_name" content="TT Metro Campus">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:description" content="{{ $seoDesc }}">
+    <meta property="og:url" content="{{ $seoUrl }}">
+    <meta property="og:image" content="{{ $seoImage }}">
+    <meta name="twitter:card" content="summary_large_image">
+    @stack('head')
     <meta name="theme-color" content="#0a2a52">
     <link rel="icon" href="{{ asset('images/logo.jpg') }}">
     @fonts

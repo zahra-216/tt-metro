@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Apply Now - TT Metro Campus')
+@section('description', 'Apply online for '.levels_sentence(offered_levels()).' programmes at TT Metro Campus, Mount Lavinia, Sri Lanka.')
 
 @section('content')
 <x-page-header title="Apply Now" subtitle="Tell us a little about yourself and our admissions team will get in touch." crumb="Apply" />

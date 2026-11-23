@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Faculty;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Links in the sitemap, canonical tags and share previews must be https on the live site.
+        if (! app()->isLocal()) {
+            URL::forceScheme('https');
+        }
+
         View::composer('layouts.app', function ($view) {
             $view->with('navFaculties', Schema::hasTable('faculties') ? Faculty::visible()->orderBy('sort_order')->get() : collect());
         });

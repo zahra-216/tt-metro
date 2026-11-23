@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+@push('head')
+<script type="application/ld+json">{!! json_encode(array_filter([
+    '@'.'context' => 'https://schema.org',
+    '@type' => 'CollegeOrUniversity',
+    'name' => 'TT Metro Campus',
+    'url' => url('/'),
+    'logo' => asset('images/logo.jpg'),
+    'telephone' => setting('phone_1'),
+    'email' => setting('email_1'),
+    'address' => array_filter(['@type' => 'PostalAddress', 'streetAddress' => setting('address'), 'addressLocality' => 'Mount Lavinia', 'addressCountry' => 'LK']),
+    'sameAs' => array_values(array_filter([setting('facebook'), setting('instagram'), setting('youtube'), setting('linkedin'), setting('tiktok')])),
+]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+@endpush
+
 @php
     $hero = media(setting('hero_image'));
     $icons = ['science-technology' => 'cpu', 'engineering' => 'wrench', 'commerce-management' => 'chart', 'arts-culture' => 'palette', 'language-vocational-studies' => 'language'];

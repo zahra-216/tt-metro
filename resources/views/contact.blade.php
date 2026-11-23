@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Contact Us - TT Metro Campus')
+@section('description', 'Contact TT Metro Campus in Mount Lavinia, Sri Lanka: address, phone numbers, email, opening hours, map and branches.')
 
 @section('content')
 <x-page-header title="Contact Us" subtitle="We would love to hear from you. Reach out with any questions about admissions or programmes." crumb="Contact" />

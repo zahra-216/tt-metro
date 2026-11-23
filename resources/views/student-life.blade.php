@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Student Life - TT Metro Campus')
+@section('description', 'Campus facilities, scholarships and student services at TT Metro Campus, Mount Lavinia, Sri Lanka.')
 
 @section('content')
 <x-page-header title="Student Life" subtitle="Facilities, scholarships and services that make campus life rewarding." />

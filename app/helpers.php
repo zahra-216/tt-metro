@@ -19,6 +19,24 @@ if (! function_exists('section_on')) {
     }
 }
 
+if (! function_exists('seo_verification')) {
+    /**
+     * The Google Search Console code the admin pasted (Site settings > Search engines). Accepts the whole
+     * <meta ...> tag, "google-site-verification=abc..." or just the code. Null when empty or unusable.
+     */
+    function seo_verification(): ?string
+    {
+        $raw = trim((string) setting('google_site_verification'));
+
+        if (preg_match('/content\s*=\s*["\']([^"\']+)["\']/i', $raw, $m)) {
+            $raw = $m[1];
+        }
+        $raw = trim(preg_replace('/^google-site-verification=/i', '', $raw));
+
+        return preg_match('/^[A-Za-z0-9_\-]{10,200}$/', $raw) ? $raw : null;
+    }
+}
+
 if (! function_exists('whatsapp_url')) {
     /**
      * Link that opens a WhatsApp chat with the campus number (admin "Site settings", else the default below).

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'About Us - TT Metro Campus')
+@section('description', 'Learn about TT Metro Campus in Mount Lavinia, Sri Lanka: our story, vision and mission, the Founder Chairman message and the team behind the campus.')
 
 @section('content')
 @php
