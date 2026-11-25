@@ -12,6 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // www.ttmetrocampus.com -> ttmetrocampus.com (one address for Google)
+        $middleware->prepend(\App\Http\Middleware\RedirectWww::class);
         $middleware->alias(['page' => \App\Http\Middleware\HidePage::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
