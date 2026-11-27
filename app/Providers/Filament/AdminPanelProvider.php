@@ -28,8 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->profile()
-            // after creating a record, go back to its list instead of staying on the edit page
+            // after creating or editing a record, go back to its list
             ->resourceCreatePageRedirect('index')
+            ->resourceEditPageRedirect('index')
             ->darkMode(false)
             ->font('Inter')
             ->userMenu(position: UserMenuPosition::Sidebar)
