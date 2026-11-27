@@ -23,9 +23,6 @@ class GalleryAlbumForm
                     ->image()
                     ->directory('gallery')
                     ->helperText('Leave empty to use the first photo of the album.'),
-                TextInput::make('sort_order')
-                    ->numeric()
-                    ->default(0),
                 Toggle::make('is_active')
                     ->default(true),
                 ...MediaFields::make('items', 'gallery', 'the album'),
