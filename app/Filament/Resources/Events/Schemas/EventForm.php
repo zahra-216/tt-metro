@@ -36,6 +36,17 @@ class EventForm
                     ->helperText('Shown on the events list and as the first photo on the event page.'),
                 Toggle::make('is_active')
                     ->default(true),
+                FileUpload::make('bulk_media')
+                    ->label('Upload several photos & videos at once')
+                    ->helperText('Select or drag many files together (photos, MP4 or WEBM videos, up to 50 MB each). Wait until all are uploaded, then press Save: they are added to the list below.')
+                    ->multiple()
+                    ->reorderable()
+                    ->appendFiles()
+                    ->panelLayout('grid')
+                    ->directory('events')
+                    ->acceptedFileTypes(['image/*', 'video/mp4', 'video/webm'])
+                    ->maxSize(51200)
+                    ->columnSpanFull(),
                 Repeater::make('images')
                     ->label('More photos & videos')
                     ->relationship()
@@ -43,7 +54,7 @@ class EventForm
                     ->columnSpanFull()
                     ->grid(2)
                     ->defaultItems(0)
-                    ->addActionLabel('Add photo or video')
+                    ->addActionLabel('Add one photo, video or YouTube link')
                     ->schema([
                         Select::make('type')
                             ->options(['image' => 'Photo', 'video' => 'Uploaded video (mp4)', 'youtube' => 'YouTube / Vimeo link'])
