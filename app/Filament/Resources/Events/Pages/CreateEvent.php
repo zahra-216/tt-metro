@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Events\Pages;
 
 use App\Filament\Resources\Events\EventResource;
-use App\Filament\Resources\Events\Pages\Concerns\SavesBulkMedia;
+use App\Filament\Support\SavesBulkMedia;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateEvent extends CreateRecord
@@ -12,13 +12,8 @@ class CreateEvent extends CreateRecord
 
     protected static string $resource = EventResource::class;
 
-    protected function mutateFormDataBeforeCreate(array $data): array
+    protected function mediaRelation(): string
     {
-        return $this->pullBulkMedia($data);
-    }
-
-    protected function afterCreate(): void
-    {
-        $this->storeBulkMedia();
+        return 'images';
     }
 }
