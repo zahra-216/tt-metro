@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
-        $seoTitle = trim($__env->yieldContent('title')) ?: 'TT Metro Campus - Higher Education Institute, Sri Lanka';
-        $seoDesc = trim($__env->yieldContent('description')) ?: (setting('seo_description') ?: 'TT Metro Campus is a leading higher education institute in Mount Lavinia, Sri Lanka, offering '.levels_sentence(offered_levels()).' programmes.');
-        $seoImage = trim($__env->yieldContent('og_image')) ?: (media(setting('seo_image')) ?: asset('images/logo.jpg'));
+        // @section values arrive already escaped; decode them so {{ }} below does not escape them twice
+        $text = fn (string $name) => trim(html_entity_decode($__env->yieldContent($name), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        $seoTitle = $text('title') ?: 'TT Metro Campus - Higher Education Institute, Sri Lanka';
+        $seoDesc = $text('description') ?: (setting('seo_description') ?: 'TT Metro Campus is a leading higher education institute in Mount Lavinia, Sri Lanka, offering '.levels_sentence(offered_levels()).' programmes.');
+        $seoImage = $text('og_image') ?: (media(setting('seo_image')) ?: asset('images/logo.jpg'));
         $seoUrl = url()->current();
     @endphp
     <title>{{ $seoTitle }}</title>

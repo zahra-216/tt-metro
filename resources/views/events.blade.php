@@ -3,7 +3,7 @@
 @section('description', 'Latest events, news and announcements from TT Metro Campus, Mount Lavinia, Sri Lanka.')
 
 @section('content')
-<x-page-header title="Events &amp; News" subtitle="Celebrations, workshops, partnerships and milestones at TT Metro Campus." crumb="Events" />
+<x-page-header title="Events and News" subtitle="Celebrations, workshops, partnerships and milestones at TT Metro Campus." crumb="Events" />
 
 <section class="section">
     <div class="wrap">

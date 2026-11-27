@@ -145,7 +145,7 @@
         <div class="flex flex-wrap items-end justify-between gap-4">
             <div class="reveal max-w-2xl">
                 <span class="eyebrow">Campus Updates</span>
-                <h2 class="h-section">Events &amp; news</h2>
+                <h2 class="h-section">Events and news</h2>
             </div>
             <a href="{{ route('events') }}" class="btn btn-ghost">View all events</a>
         </div>
