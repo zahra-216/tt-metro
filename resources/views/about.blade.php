@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'About Us - TT Metro Campus')
-@section('description', 'Learn about TT Metro Campus in Mount Lavinia, Sri Lanka: our story, vision and mission, the Founder Chairman message and the team behind the campus.')
+@section('title', \App\Support\PageTexts::title('about'))
+@section('description', \App\Support\PageTexts::get('about', 'description'))
 
 @section('content')
 @php
@@ -9,7 +9,7 @@
     $first = array_key_first($tabs);
     $paras = fn ($t) => array_filter(preg_split('/\R{2,}/', (string) $t));
 @endphp
-<x-page-header title="About Us" subtitle="An innovative higher education institute established in 2015 in Sri Lanka." />
+<x-page-header page="about" />
 
 {{-- Story + stats --}}
 @if (section_on('about.story'))

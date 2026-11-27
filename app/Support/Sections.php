@@ -65,12 +65,10 @@ class Sections
         ];
     }
 
-    /** Is the page behind a menu label (About Us, Student Life, Gallery, Events) switched on? Other labels always are. */
-    public static function labelOn(string $label): bool
+    /** Is this page switched on? Only About Us, Student Life, Gallery and Events can be switched off. */
+    public static function pageOn(string $page): bool
     {
-        $keys = ['About Us' => 'about', 'Student Life' => 'student_life', 'Gallery' => 'gallery', 'Events' => 'events'];
-
-        return ! isset($keys[$label]) || self::on('page.'.$keys[$label]);
+        return ! in_array($page, ['about', 'student_life', 'gallery', 'events'], true) || self::on('page.'.$page);
     }
 
     /** Every key with its default. */

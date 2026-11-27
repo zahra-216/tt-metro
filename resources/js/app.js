@@ -6,6 +6,26 @@ window.Alpine = Alpine;
 Alpine.plugin(collapse);
 Alpine.start();
 
+// The page names can be changed in the admin, so make sure the top menu still fits the screen:
+// first tighten the spacing and, if that is not enough, show the menu button instead.
+const fitMenu = () => {
+    const root = document.documentElement;
+    const row = document.querySelector('[data-header-row]');
+    if (!row) return;
+    root.classList.remove('nav-compact', 'nav-tight');
+    const tooWide = () => row.scrollWidth > row.clientWidth + 1;
+    if (!tooWide()) return;
+    root.classList.add('nav-compact');
+    if (tooWide()) root.classList.replace('nav-compact', 'nav-tight');
+};
+fitMenu();
+document.fonts?.ready.then(fitMenu);
+let fitFrame;
+window.addEventListener('resize', () => {
+    cancelAnimationFrame(fitFrame);
+    fitFrame = requestAnimationFrame(fitMenu);
+});
+
 // Scroll-reveal
 const reveal = new IntersectionObserver((entries) => {
     entries.forEach((e) => {

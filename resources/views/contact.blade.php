@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Contact Us - TT Metro Campus')
-@section('description', 'Contact TT Metro Campus in Mount Lavinia, Sri Lanka: address, phone numbers, email, opening hours, map and branches.')
+@section('title', \App\Support\PageTexts::title('contact'))
+@section('description', \App\Support\PageTexts::get('contact', 'description'))
 
 @section('content')
-<x-page-header title="Contact Us" subtitle="We would love to hear from you. Reach out with any questions about admissions or programmes." crumb="Contact" />
+<x-page-header page="contact" />
 
 <section class="section">
     <div class="wrap grid gap-10 lg:grid-cols-5">

@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Privacy Policy - TT Metro Campus')
-@section('description', 'How TT Metro Campus collects, uses and protects the information you give us through our website, enquiry forms, online classes and learning portal.')
+@section('title', \App\Support\PageTexts::title('privacy'))
+@section('description', \App\Support\PageTexts::get('privacy', 'description'))
 
 @section('content')
-<x-page-header title="Privacy Policy" subtitle="How we handle the information you share with TT Metro Campus." />
+<x-page-header page="privacy" />
 <section class="section">
     <div class="wrap max-w-4xl">
         <div class="prose-site">

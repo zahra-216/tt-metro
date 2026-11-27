@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Gallery - TT Metro Campus')
-@section('description', 'Photos from events, celebrations and campus life at TT Metro Campus, Sri Lanka.')
+@section('title', \App\Support\PageTexts::title('gallery'))
+@section('description', \App\Support\PageTexts::get('gallery', 'description'))
 
 @section('content')
-<x-page-header title="Gallery" subtitle="Moments from our campus - ceremonies, workshops, excursions and more." />
+<x-page-header page="gallery" />
 
 <section class="section">
     <div class="wrap">

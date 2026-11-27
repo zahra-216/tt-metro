@@ -10,6 +10,7 @@
         $seoDesc = $text('description') ?: (setting('seo_description') ?: 'TT Metro Campus is a leading higher education institute in Mount Lavinia, Sri Lanka, offering '.levels_sentence(offered_levels()).' programmes.');
         $seoImage = $text('og_image') ?: (media(setting('seo_image')) ?: asset('images/logo.jpg'));
         $seoUrl = url()->current();
+        $menu = fn (string $page, string $place = 'menu') => \App\Support\PageTexts::name($page, $place); // names from Site > Pages
     @endphp
     <title>{{ $seoTitle }}</title>
     <meta name="description" content="{{ $seoDesc }}">
@@ -56,25 +57,25 @@
 
     {{-- Main navigation --}}
     <header class="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-lg" x-data="{ open: null }" @keydown.escape.window="open = null; menu = false">
-        <div class="flex h-[5.25rem] w-full items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6">
+        <div data-header-row class="flex h-[5.25rem] w-full items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6">
             <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-3">
                 <img src="{{ asset('images/logo.jpg') }}" alt="TT Metro Campus logo" class="h-12 w-12 rounded-full object-cover">
                 <span class="leading-tight">
-                    <span class="block whitespace-nowrap font-display text-[17px] font-extrabold tracking-tight text-brand-700 min-[400px]:text-xl sm:text-[26px] 2xl:text-[32px]">TT METRO CAMPUS</span>
+                    <span data-brand-name class="block whitespace-nowrap font-display text-[17px] font-extrabold tracking-tight text-brand-700 min-[400px]:text-xl sm:text-[26px] 2xl:text-[32px]">TT METRO CAMPUS</span>
                     <span class="mt-0.5 block whitespace-nowrap text-[9.5px] font-medium tracking-normal text-muted min-[400px]:text-[11px] sm:text-[13px] sm:tracking-wide">Empowering Minds, Shaping Futures.</span>
                 </span>
             </a>
 
-            <nav class="hidden items-center gap-1 xl:flex" aria-label="Main">
+            <nav data-main-nav class="hidden items-center gap-1 xl:flex" aria-label="Main">
                 @php
                     $link = 'flex items-center gap-1 whitespace-nowrap rounded-xl px-3 py-2.5 text-[15px] font-semibold text-brand-700 transition hover:bg-sky-soft';
                     $active = 'bg-sky-soft';
                 @endphp
-                <a href="{{ route('home') }}" class="{{ $link }} {{ request()->routeIs('home') ? $active : '' }}">Home</a>
+                <a href="{{ route('home') }}" class="{{ $link }} {{ request()->routeIs('home') ? $active : '' }}">{{ $menu('home') }}</a>
 
                 @if (section_on('page.about'))
                 <div class="relative" @mouseenter="open = 'about'" @mouseleave="open = null">
-                    <a href="{{ route('about') }}" class="{{ $link }} {{ request()->routeIs('about') ? $active : '' }}">About Us <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
+                    <a href="{{ route('about') }}" class="{{ $link }} {{ request()->routeIs('about') ? $active : '' }}">{{ $menu('about') }} <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
                     <div x-cloak x-show="open === 'about'" x-transition.opacity class="absolute left-0 top-full w-60 pt-2">
                         <div class="rounded-2xl border border-line bg-white p-2 shadow-lift">
                             <a class="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-sky-soft" href="{{ route('about') }}">Our Story</a>
@@ -86,7 +87,7 @@
                 @endif
 
                 <div class="relative" @mouseenter="open = 'academics'" @mouseleave="open = null">
-                    <a href="{{ route('academics') }}" class="{{ $link }} {{ request()->routeIs('academics', 'programme') ? $active : '' }}">Academics <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
+                    <a href="{{ route('academics') }}" class="{{ $link }} {{ request()->routeIs('academics', 'programme') ? $active : '' }}">{{ $menu('academics') }} <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
                     <div x-cloak x-show="open === 'academics'" x-transition.opacity class="absolute left-0 top-full w-80 pt-2">
                         <div class="rounded-2xl border border-line bg-white p-2 shadow-lift">
                             <a class="block rounded-lg px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-sky-soft" href="{{ route('academics') }}">All Programmes</a>
@@ -100,7 +101,7 @@
 
                 @if (section_on('page.student_life'))
                 <div class="relative" @mouseenter="open = 'life'" @mouseleave="open = null">
-                    <a href="{{ route('student-life') }}" class="{{ $link }} {{ request()->routeIs('student-life') ? $active : '' }}">Student Life <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
+                    <a href="{{ route('student-life') }}" class="{{ $link }} {{ request()->routeIs('student-life') ? $active : '' }}">{{ $menu('student_life') }} <x-ico name="chevron" class="h-3.5 w-3.5" /></a>
                     <div x-cloak x-show="open === 'life'" x-transition.opacity class="absolute left-0 top-full w-56 pt-2">
                         <div class="rounded-2xl border border-line bg-white p-2 shadow-lift">
                             @foreach (['facility' => 'Facilities', 'scholarship' => 'Scholarships', 'services' => 'Student Services'] as $key => $label)
@@ -112,32 +113,32 @@
                 </div>
                 @endif
 
-                @if (section_on('page.gallery'))<a href="{{ route('gallery') }}" class="{{ $link }} {{ request()->routeIs('gallery', 'album') ? $active : '' }}">Gallery</a>@endif
-                @if (section_on('page.events'))<a href="{{ route('events') }}" class="{{ $link }} {{ request()->routeIs('events', 'event', 'post') ? $active : '' }}">Events</a>@endif
-                <a href="{{ route('contact') }}" class="{{ $link }} {{ request()->routeIs('contact') ? $active : '' }}">Contact</a>
+                @if (section_on('page.gallery'))<a href="{{ route('gallery') }}" class="{{ $link }} {{ request()->routeIs('gallery', 'album') ? $active : '' }}">{{ $menu('gallery') }}</a>@endif
+                @if (section_on('page.events'))<a href="{{ route('events') }}" class="{{ $link }} {{ request()->routeIs('events', 'event', 'post') ? $active : '' }}">{{ $menu('events') }}</a>@endif
+                <a href="{{ route('contact') }}" class="{{ $link }} {{ request()->routeIs('contact') ? $active : '' }}">{{ $menu('contact') }}</a>
             </nav>
 
             <div class="flex items-center gap-2">
-                <form action="{{ route('academics') }}" method="get" class="hidden items-center 2xl:flex" role="search">
+                <form action="{{ route('academics') }}" method="get" class="hidden items-center 2xl:flex" role="search" data-nav-search>
                     <label class="sr-only" for="nav-search">Search programmes</label>
                     <input id="nav-search" name="q" type="search" placeholder="Search programmes…" class="h-11 w-40 rounded-full border border-transparent bg-surface px-5 text-sm outline-none transition focus:w-56 focus:border-brand-600 focus:bg-white">
                 </form>
-                <a href="{{ route('academics') }}" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 transition hover:bg-sky-soft max-[359px]:hidden 2xl:hidden" aria-label="Search programmes"><x-ico name="search" /></a>
-                <a href="{{ route('apply') }}" class="btn btn-primary hidden whitespace-nowrap sm:inline-flex">Apply Now</a>
-                <button type="button" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 xl:hidden" @click="menu = !menu" :aria-expanded="menu" aria-label="Toggle menu">
+                <a href="{{ route('academics') }}" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 transition hover:bg-sky-soft max-[359px]:hidden 2xl:hidden" aria-label="Search programmes" data-nav-search-icon><x-ico name="search" /></a>
+                <a href="{{ route('apply') }}" class="btn btn-primary hidden whitespace-nowrap sm:inline-flex">{{ $menu('apply') }}</a>
+                <button data-menu-button type="button" class="grid h-11 w-11 place-items-center rounded-full bg-surface text-navy-900 xl:hidden" @click="menu = !menu" :aria-expanded="menu" aria-label="Toggle menu">
                     <x-ico name="menu" x-show="!menu" /><x-ico name="x" x-cloak x-show="menu" />
                 </button>
             </div>
         </div>
 
         {{-- Mobile menu --}}
-        <div x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-8.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
+        <div data-mobile-menu x-cloak x-show="menu" x-transition class="max-h-[calc(100dvh-8.5rem)] overflow-y-auto overscroll-contain border-t border-line bg-white xl:hidden">
             <nav class="w-full space-y-1 px-4 py-4 sm:px-6" aria-label="Mobile">
-                @foreach ([['Home', route('home')], ['About Us', route('about')], ['Academics', route('academics')], ['Student Life', route('student-life')], ['Gallery', route('gallery')], ['Events', route('events')], ['Contact', route('contact')]] as [$label, $url])
-                    @continue(! \App\Support\Sections::labelOn($label))
-                    <a href="{{ $url }}" class="block rounded-xl px-4 py-3 text-base font-semibold text-brand-700 hover:bg-sky-soft">{{ $label }}</a>
+                @foreach (['home', 'about', 'academics', 'student_life', 'gallery', 'events', 'contact'] as $p)
+                    @continue(! \App\Support\Sections::pageOn($p))
+                    <a href="{{ route(str_replace('_', '-', $p)) }}" class="block rounded-xl px-4 py-3 text-base font-semibold text-brand-700 hover:bg-sky-soft">{{ $menu($p) }}</a>
                 @endforeach
-                <a href="{{ route('apply') }}" class="btn btn-primary mt-3 w-full">Apply Now</a>
+                <a href="{{ route('apply') }}" class="btn btn-primary mt-3 w-full">{{ $menu('apply') }}</a>
                 <div class="mt-4 grid grid-cols-1 gap-2 border-t border-line pt-4 text-sm font-semibold text-navy-900">
                     @if (setting('student_portal_url'))<a class="flex items-center gap-2 rounded-xl bg-sky-soft px-4 py-3" href="{{ setting('student_portal_url') }}"><x-ico name="book" class="h-4 w-4" /> Student Portal</a>@endif
                     @if (setting('staff_portal_url'))<a class="flex items-center gap-2 rounded-xl bg-sky-soft px-4 py-3" href="{{ setting('staff_portal_url') }}"><x-ico name="briefcase" class="h-4 w-4" /> Staff Portal</a>@endif
@@ -171,9 +172,9 @@
             <div>
                 <h3 class="font-display text-sm font-bold uppercase tracking-widest text-white">Quick Links</h3>
                 <ul class="mt-5 space-y-3 text-sm">
-                    @foreach ([['Home', route('home')], ['About Us', route('about')], ['Academics', route('academics')], ['Student Life', route('student-life')], ['Gallery', route('gallery')], ['Events', route('events')], ['Contact Us', route('contact')], ['Apply Now', route('apply')]] as [$label, $url])
-                    @continue(! \App\Support\Sections::labelOn($label))
-                        <li><a href="{{ $url }}" class="transition hover:text-sky-brand">{{ $label }}</a></li>
+                    @foreach (['home', 'about', 'academics', 'student_life', 'gallery', 'events', 'contact', 'apply'] as $p)
+                    @continue(! \App\Support\Sections::pageOn($p))
+                        <li><a href="{{ route(str_replace('_', '-', $p)) }}" class="transition hover:text-sky-brand">{{ $menu($p, 'footer') }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -207,7 +208,7 @@
         <div class="border-t border-white/10">
             <div class="wrap flex flex-col items-center justify-between gap-2 py-6 text-xs sm:flex-row">
                 <p>© {{ date('Y') }} TT Metro Campus. All rights reserved.</p>
-                <p class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1"><a href="{{ route('privacy') }}" class="font-semibold hover:text-sky-brand">Privacy Policy</a><span class="hidden sm:inline">·</span><span>Higher Education Institute · Mount Lavinia, Sri Lanka</span></p>
+                <p class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1"><a href="{{ route('privacy') }}" class="font-semibold hover:text-sky-brand">{{ $menu('privacy') }}</a><span class="hidden sm:inline">·</span><span>Higher Education Institute · Mount Lavinia, Sri Lanka</span></p>
             </div>
         </div>
     </footer>

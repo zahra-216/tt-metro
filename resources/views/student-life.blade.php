@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Student Life - TT Metro Campus')
-@section('description', 'Campus facilities, scholarships and student services at TT Metro Campus, Mount Lavinia, Sri Lanka.')
+@section('title', \App\Support\PageTexts::title('student_life'))
+@section('description', \App\Support\PageTexts::get('student_life', 'description'))
 
 @section('content')
-<x-page-header title="Student Life" subtitle="Facilities, scholarships and services that make campus life rewarding." />
+<x-page-header page="student_life" />
 @php $facilities = $items['facility'] ?? collect(); $scholarships = $items['scholarship'] ?? collect(); @endphp
 
 {{-- Facilities --}}

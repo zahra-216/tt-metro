@@ -76,6 +76,19 @@
     .prose-site img { @apply my-4 max-h-80 w-auto max-w-full rounded-xl object-contain; }
 }
 
+/* Added by fitMenu() in app.js when long page names do not fit the top menu */
+@media (min-width: 80rem) {
+    .nav-compact [data-main-nav] { gap: 0; }
+    .nav-compact [data-main-nav] > a, .nav-compact [data-main-nav] > div > a { padding-inline: 0.45rem; font-size: 14px; }
+    .nav-compact [data-brand-name] { font-size: 22px; }
+    .nav-compact [data-nav-search] { display: none; }
+    .nav-compact [data-nav-search-icon] { display: grid; }
+
+    .nav-tight [data-main-nav] { display: none; }
+    .nav-tight [data-menu-button] { display: grid; }
+    .nav-tight [data-mobile-menu] { display: block; }
+}
+
 @keyframes rise {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: none; }

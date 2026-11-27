@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Academics - TT Metro Campus')
-@section('description', 'Explore '.levels_sentence(offered_levels()).' programmes at TT Metro Campus, Mount Lavinia, Sri Lanka. See modules, entry requirements and how to apply.')
+@section('title', \App\Support\PageTexts::title('academics'))
+@section('description', \App\Support\PageTexts::get('academics', 'description'))
 
 @section('content')
-<x-page-header title="Academics" subtitle="{{ levels_sentence($levels) }} programmes across {{ $faculties->count() }} {{ Str::plural('faculty', $faculties->count()) }}." />
+<x-page-header page="academics" />
 
 <section class="section">
     <div class="wrap">

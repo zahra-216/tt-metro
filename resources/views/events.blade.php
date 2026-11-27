@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Events - TT Metro Campus')
-@section('description', 'Latest events, news and announcements from TT Metro Campus, Mount Lavinia, Sri Lanka.')
+@section('title', \App\Support\PageTexts::title('events'))
+@section('description', \App\Support\PageTexts::get('events', 'description'))
 
 @section('content')
-<x-page-header title="Events and News" subtitle="Celebrations, workshops, partnerships and milestones at TT Metro Campus." crumb="Events" />
+<x-page-header page="events" />
 
 <section class="section">
     <div class="wrap">
